@@ -141,36 +141,29 @@
     var flotante = document.querySelector('.wsp-flotante');
     if (!flotante || !('IntersectionObserver' in window)) return;
     var menu = document.getElementById('menu-movil');
-    var estado = { inicio: true, contacto: false, pie: false };
+    var barra = document.getElementById('barra-cotizar');
+    var estado = { contacto: false, pie: false };
+    // «WhatsApp siempre a mano» (guía): visible desde la portada. Se oculta solo donde ya hay otro
+    // acceso: Contacto, el pie, el menú móvil abierto o la barra inferior móvil (que trae su propio botón).
     var actualizar = function () {
       var menuAbierto = menu && !menu.hidden;
-      flotante.setAttribute('data-visible', String(!estado.inicio && !estado.contacto && !estado.pie && !menuAbierto));
+      var barraActiva = barra && barra.getAttribute('data-visible') === 'true' && barra.getClientRects().length > 0;
+      flotante.setAttribute('data-visible', String(!estado.contacto && !estado.pie && !menuAbierto && !barraActiva));
     };
-    var observar = function (el, clave, margen, soloArriba) {
+    var observar = function (el, clave) {
       if (!el) return;
       new IntersectionObserver(function (entradas) {
-        var e = entradas[0];
-        estado[clave] = soloArriba ? (e.isIntersecting || e.boundingClientRect.top > 0) : e.isIntersecting;
+        estado[clave] = entradas[0].isIntersecting;
         actualizar();
-      }, { rootMargin: margen || '0px' }).observe(el);
+      }).observe(el);
     };
     document.documentElement.classList.add('wsp-activo');
-    // Aparece cuando el botón de cotizar de la portada ya quedó por encima de la vista (bajo el encabezado);
-    // se calcula con la posición real para que funcione desde cualquier punto de partida.
-    var ctaPortada = document.querySelector('#inicio [data-cotizar]') || document.getElementById('inicio');
-    var pendienteWsp = false;
-    var revisarPortada = function () {
-      pendienteWsp = false;
-      estado.inicio = ctaPortada ? ctaPortada.getBoundingClientRect().bottom > 72 : false;
-      actualizar();
-    };
-    window.addEventListener('scroll', function () {
-      if (!pendienteWsp) { pendienteWsp = true; requestAnimationFrame(revisarPortada); }
-    }, { passive: true });
-    window.addEventListener('resize', revisarPortada);
-    revisarPortada();
     observar(document.getElementById('contacto'), 'contacto');
     observar(document.querySelector('footer'), 'pie');
+    if (barra && 'MutationObserver' in window) {
+      new MutationObserver(actualizar).observe(barra, { attributes: true, attributeFilter: ['data-visible'] });
+    }
+    window.addEventListener('resize', actualizar);
     var botonMenuWsp = document.getElementById('boton-menu');
     if (botonMenuWsp) botonMenuWsp.addEventListener('click', function () { window.setTimeout(actualizar, 0); });
     if (menu) menu.addEventListener('click', function () { window.setTimeout(actualizar, 0); });

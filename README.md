@@ -13,7 +13,7 @@ Cada `dist/` contiene `index.html` (entrada), `propuesta-01/` (editorial y fotog
 
 1. Suba el **contenido** de `dist/` (o descomprima el `.zip`) en la carpeta pública del hosting. Es HTML estático con rutas relativas.
 2. Antes de la publicación definitiva, en `output/sitio.config.json`:
-   - escriba el número de WhatsApp en `whatsapp`; vacío, el botón no aparece;
+   - reemplace el número de WhatsApp de **prueba** (+56 9 0000 0000) por el real en `whatsapp` (vacío = el botón no aparece);
    - cambie `indexar` a `true` para quitar el bloqueo a buscadores;
    - regenere con `npm install` (la primera vez) y `npm run dist` dentro de `output/`.
 

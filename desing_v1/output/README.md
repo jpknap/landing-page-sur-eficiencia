@@ -85,7 +85,7 @@ Stack: HTML estático + Tailwind CSS 3.4 (CLI) + íconos Lucide 0.460 (solo los 
 
 - Problema que resuelve, propuesta de valor y prueba (`essence.problem`, `value_proposition`, `proof`): se omitieron.
 - Cobertura territorial (`essence.coverage`): no se menciona ninguna zona. La foto de la vivienda tampoco se identifica por lugar.
-- **WhatsApp:** el botón está implementado, pero falta el **número verificado**: mientras `sitio.config.json` no lo tenga, no se muestra. **Correo electrónico:** sin dato, no se publica.
+- **WhatsApp:** funciona con un **número de prueba** (+56 9 0000 0000). Falta el número real del cliente. **Correo electrónico:** sin dato, no se publica.
 - Trato usted/tú (`voice.address`).
 - Formación profesional del equipo (para «Nosotros»).
 - Fotografías reales (`imagery.source`): termogramas, subdivisiones e instalaciones sanitarias tienen placeholders explícitos.
@@ -147,13 +147,16 @@ Cambios aplicados igual en ambas propuestas, salvo donde se indica:
 
 ## WhatsApp (en las dos propuestas)
 
-- **Botón flotante:** abajo a la derecha, en Azul Sur con ícono blanco y anillo blanco, para que se lea también sobre fondos azules. No compite con la acción de cotizar. Al pasar el puntero o con el foco del teclado se despliega la palabra «WhatsApp».
-  - Aparece cuando el botón de cotizar de la portada sale de la vista y se oculta en Contacto y en el pie, donde ya hay acceso.
-  - Con el menú móvil abierto también se oculta.
-- **En Contacto:** un bloque «¿Prefiere conversar?» con el botón «Escribir por WhatsApp», como pide `estructura navegacion.md` («acceso directo a WhatsApp»).
-- **Ícono:** Lucide no incluye logos de marca, así que se compuso uno en estilo línea de 2 px (burbuja + auricular), coherente con el sistema de íconos de la guía.
+> **Número de prueba activo:** `sitio.config.json` tiene **+56 9 0000 0000** (ficticio y no asignado) para revisar el diseño. **Reemplácelo por el número real y ejecute `npm run dist` antes de publicar.** El build avisa con ⚠ mientras siga el de prueba.
+
+- **Color oficial de WhatsApp** (`#25D366`), a pedido del cliente para que destaque. Es la única excepción a la paleta de la guía.
+- **Botón flotante:** abajo a la derecha, verde oficial con el ícono en blanco, como el logo. Al pasar el puntero o con el foco del teclado pasa al verde oscuro oficial (`#075E54`) y despliega «WhatsApp» en blanco (7,7:1).
+  - **Visible desde que se abre la página** («WhatsApp siempre a mano», según la guía).
+  - Se oculta solo donde ya hay otro acceso: en Contacto, en el pie y con el menú móvil abierto.
+- **En Contacto:** un bloque «¿Prefiere conversar?» con el botón «Escribir por WhatsApp», en verde oficial con texto grafito (7,7:1; el blanco sobre ese verde no alcanza contraste). Responde a «acceso directo a WhatsApp» de `estructura navegacion.md`.
+- **Ícono:** Lucide no incluye logos de marca, así que se compuso uno en estilo línea de 2 px (burbuja + auricular).
 - **Comportamiento:** abre `https://wa.me/<número>?text=<mensaje>` en una pestaña nueva, anunciado a lectores de pantalla.
-- **Configuración:** el número se define en `sitio.config.json`. **Sin número no se muestra ningún elemento de WhatsApp**: ni visible ni enfocable con teclado.
+- **Configuración:** el número vive en `sitio.config.json`, y `npm run dist` lo escribe tanto en `dist/` como en los `index.html` de trabajo, para que se vea igual al abrirlos directamente. Si el campo queda vacío, no se muestra ningún elemento de WhatsApp.
 
 ## Iteración 3: separación de secciones
 

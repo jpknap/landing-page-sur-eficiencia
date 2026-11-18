@@ -28,6 +28,8 @@ if (whatsapp && digitos.length < 8) {
   process.exit(1);
 }
 const mensaje = String(args.mensaje ?? config.mensajeWhatsapp ?? '');
+const NUMERO_PRUEBA = '56900000000';
+const esPrueba = digitos === NUMERO_PRUEBA;
 const indexar = args.indexar !== undefined ? args.indexar === 'true' : Boolean(config.indexar);
 const salida = join(raiz, args.out || 'dist');
 const propuestas = readdirSync(raiz).filter((n) => /^propuesta-\d+$/.test(n)).sort();
@@ -47,6 +49,12 @@ for (const prop of propuestas) {
   mkdirSync(join(destino, 'img'), { recursive: true });
 
   let html = readFileSync(join(origen, 'index.html'), 'utf8');
+
+  // Vista local: el index.html de origen también refleja el número configurado,
+  // para que el botón se vea igual al abrir la propuesta sin pasar por dist/.
+  const metaWsp = `<meta name="sur-whatsapp" content="${escAttr(digitos)}" data-mensaje="${escAttr(mensaje)}">`;
+  const htmlOrigen = html.replace(/<meta name="sur-whatsapp" content="[^"]*" data-mensaje="[^"]*">/, metaWsp);
+  if (htmlOrigen !== html) { writeFileSync(join(origen, 'index.html'), htmlOrigen); html = htmlOrigen; }
 
   // Estáticos
   copyFileSync(join(origen, 'styles.css'), join(destino, 'styles.css'));
@@ -151,4 +159,5 @@ if (!indexar) writeFileSync(join(salida, 'robots.txt'), 'User-agent: *\nDisallow
 console.log(`✓ dist generado en ${posix.relative(process.cwd().split('\\').join('/'), salida.split('\\').join('/')) || salida}`);
 resumen.forEach((l) => console.log('  ' + l));
 console.log(`  WhatsApp: ${digitos ? `activo (+${digitos})` : 'sin número: botones ocultos'}`);
+if (esPrueba) console.warn('  ⚠ WhatsApp usa el número de PRUEBA +56 9 0000 0000: reemplácelo en sitio.config.json antes de publicar.');
 console.log(`  Indexación: ${indexar ? 'permitida' : 'bloqueada (noindex + robots.txt)'}`);
