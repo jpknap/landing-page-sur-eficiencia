@@ -1,0 +1,11 @@
+{
+  "whatsapp": "",
+  "mensajeWhatsapp": "Hola, quisiera hacer una consulta a Sur Eficiencia.",
+  "indexar": false,
+  "titulo": "Propuestas de sitio web",
+  "bajada": "Dos direcciones visuales para revisar. Las imágenes son referenciales.",
+  "propuestas": {
+    "propuesta-01": "Editorial y fotográfica",
+    "propuesta-02": "Arquitectónica, con visualización 3D"
+  }
+}

@@ -172,6 +172,60 @@
     });
   })();
 
+  /* ---------- WhatsApp: se activa solo con un número configurado ----------
+     El número vive en sitio.config.json; «npm run dist» lo escribe en <meta name="sur-whatsapp">.
+     Sin número, ningún elemento [data-whatsapp] se muestra: no se publica un enlace ficticio. */
+  (function () {
+    var meta = document.querySelector('meta[name="sur-whatsapp"]');
+    var numero = meta ? (meta.getAttribute('content') || '').replace(/\D/g, '') : '';
+    var piezas = Array.prototype.slice.call(document.querySelectorAll('[data-whatsapp]'));
+    if (numero.length < 8 || !piezas.length) return;
+    var mensaje = meta.getAttribute('data-mensaje') || '';
+    var url = 'https://wa.me/' + numero + (mensaje ? '?text=' + encodeURIComponent(mensaje) : '');
+    piezas.forEach(function (el) {
+      if (el.tagName === 'A') el.setAttribute('href', url);
+      el.hidden = false;
+    });
+
+    var flotante = document.querySelector('.wsp-flotante');
+    if (!flotante || !('IntersectionObserver' in window)) return;
+    var menu = document.getElementById('menu-movil');
+    var estado = { inicio: true, contacto: false, pie: false };
+    var actualizar = function () {
+      var menuAbierto = menu && !menu.hidden;
+      flotante.setAttribute('data-visible', String(!estado.inicio && !estado.contacto && !estado.pie && !menuAbierto));
+    };
+    var observar = function (el, clave, margen, soloArriba) {
+      if (!el) return;
+      new IntersectionObserver(function (entradas) {
+        var e = entradas[0];
+        estado[clave] = soloArriba ? (e.isIntersecting || e.boundingClientRect.top > 0) : e.isIntersecting;
+        actualizar();
+      }, { rootMargin: margen || '0px' }).observe(el);
+    };
+    document.documentElement.classList.add('wsp-activo');
+    // Aparece cuando el botón de cotizar de la portada ya quedó por encima de la vista (bajo el encabezado);
+    // se calcula con la posición real para que funcione desde cualquier punto de partida.
+    var ctaPortada = document.querySelector('#inicio [data-cotizar]') || document.getElementById('inicio');
+    var pendienteWsp = false;
+    var revisarPortada = function () {
+      pendienteWsp = false;
+      estado.inicio = ctaPortada ? ctaPortada.getBoundingClientRect().bottom > 72 : false;
+      actualizar();
+    };
+    window.addEventListener('scroll', function () {
+      if (!pendienteWsp) { pendienteWsp = true; requestAnimationFrame(revisarPortada); }
+    }, { passive: true });
+    window.addEventListener('resize', revisarPortada);
+    revisarPortada();
+    observar(document.getElementById('contacto'), 'contacto');
+    observar(document.querySelector('footer'), 'pie');
+    var botonMenuWsp = document.getElementById('boton-menu');
+    if (botonMenuWsp) botonMenuWsp.addEventListener('click', function () { window.setTimeout(actualizar, 0); });
+    if (menu) menu.addEventListener('click', function () { window.setTimeout(actualizar, 0); });
+    actualizar();
+  })();
+
   /* ---------- Validación del formulario ---------- */
   var form = document.getElementById('formulario');
   var estado = document.getElementById('estado-formulario');

@@ -6,6 +6,8 @@
   <title>Sur Eficiencia, ingeniería y consultoría</title>
   <meta name="description" content="Sur Eficiencia: ingeniería, asesoría técnica y desarrollo de proyectos. Diagnóstico térmico, topografía, pavimentación y aguas lluvias, subdivisión, y agua potable y alcantarillado.">
   <meta name="robots" content="noindex">
+  <!-- WhatsApp: número en sitio.config.json; «npm run dist» lo escribe aquí. Vacío = el botón no se muestra. -->
+  <meta name="sur-whatsapp" content="" data-mensaje="Hola, quisiera hacer una consulta a Sur Eficiencia.">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,14 +127,14 @@
     </section>
 
     <!-- ============ 2. Servicios: planilla con pestañas ============ -->
-    <section id="servicios" aria-labelledby="titulo-servicios" class="py-16 md:py-24">
+    <section id="servicios" aria-labelledby="titulo-servicios" class="bg-niebla py-16 md:py-24">
       <div class="contenedor">
         <div class="grid gap-6 lg:grid-cols-12" data-revelar>
           <h2 id="titulo-servicios" class="text-3xl font-bold lg:col-span-4 lg:text-4xl">Servicios</h2>
           <p class="max-w-lectura text-lg lg:col-span-6 lg:col-start-6">Cinco áreas de trabajo. Cada una parte por entender el lugar y el requerimiento antes de proponer una solución.</p>
         </div>
 
-        <div class="mt-12 grid border border-azul/30 lg:grid-cols-12" data-revelar style="--retraso:80ms">
+        <div class="mt-12 grid border border-azul/30 bg-blanco lg:grid-cols-12" data-revelar style="--retraso:80ms">
           <!-- Lista de pestañas (escritorio) -->
           <div role="tablist" aria-label="Servicios" aria-orientation="vertical" id="lista-servicios" class="hidden border-r border-azul/30 lg:col-span-4 lg:flex lg:flex-col">
             <button role="tab" id="tab-termico" aria-controls="panel-termico" aria-selected="true" class="pestana flex items-center gap-3 border-b border-azul/15 px-6 py-5 text-left font-titulo text-base font-semibold text-azul transition-colors duration-rapido hover:bg-niebla"><span data-icon="thermometer" class="shrink-0 text-verde"></span>Diagnóstico térmico y eficiencia energética</button>
@@ -309,7 +311,7 @@
     </section>
 
     <!-- ============ 4. Nosotros ============ -->
-    <section id="nosotros" aria-labelledby="titulo-nosotros" class="py-16 md:py-24">
+    <section id="nosotros" aria-labelledby="titulo-nosotros" class="bg-niebla py-16 md:py-24">
       <div class="contenedor grid gap-8 lg:grid-cols-12">
         <div class="lg:col-span-4" data-revelar>
           <h2 id="titulo-nosotros" class="text-3xl font-bold lg:text-4xl">Nosotros</h2>
@@ -335,7 +337,7 @@
     </section>
 
     <!-- ============ 5. Contacto: formulario como lámina con cajetín ============ -->
-    <section id="contacto" aria-labelledby="titulo-contacto" class="bg-niebla py-16 md:py-24">
+    <section id="contacto" aria-labelledby="titulo-contacto" class="border-t border-azul/15 bg-blanco py-16 md:py-24">
       <div class="contenedor grid gap-8 lg:grid-cols-12">
         <div class="lg:col-span-4" data-revelar>
           <h2 id="titulo-contacto" class="text-3xl font-bold lg:text-4xl">Solicitar cotización</h2>
@@ -345,6 +347,11 @@
             <li class="flex gap-3"><span data-icon="check" class="shrink-0 text-verde"></span>Qué necesita resolver</li>
             <li class="flex gap-3"><span data-icon="check" class="shrink-0 text-verde"></span>Planos o antecedentes que ya tenga, si existen</li>
           </ul>
+          <div class="mt-8 border-t border-pizarra/20 pt-6" data-whatsapp hidden>
+            <p class="font-titulo font-semibold text-azul">¿Prefiere conversar?</p>
+            <p class="mt-1 text-pizarra">También puede hacer su consulta por WhatsApp.</p>
+            <a href="#whatsapp" class="btn-wsp mt-4" data-whatsapp target="_blank" rel="noopener"><span data-icon="whatsapp" data-size="20"></span>Escribir por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          </div>
         </div>
 
         <form id="formulario" class="marco border border-azul/30 bg-blanco lg:col-span-8" data-revelar style="--retraso:80ms" novalidate aria-describedby="aviso-demo">
@@ -417,6 +424,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- WhatsApp flotante: oculto hasta configurar un número verificado -->
+  <a href="#whatsapp" class="wsp-flotante" data-whatsapp target="_blank" rel="noopener" aria-label="Escribir a Sur Eficiencia por WhatsApp (se abre en una pestaña nueva)" hidden>
+    <span data-icon="whatsapp" data-size="26"></span>
+    <span class="wsp-etiqueta">WhatsApp</span>
+  </a>
 
   <script src="vendor/icons.js"></script>
   <script src="src/main.js"></script>

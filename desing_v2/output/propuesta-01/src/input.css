@@ -200,3 +200,63 @@
 /* Fila de chips: oculta la barra de desplazamiento, mantiene el gesto */
 #chips-servicios { scrollbar-width: none; }
 #chips-servicios::-webkit-scrollbar { display: none; }
+
+/* ---------- WhatsApp ----------
+   Solo se muestra cuando hay un número configurado (sitio.config.json → npm run dist).
+   Azul de marca con ícono blanco: acompaña sin competir con la acción de cotizar. */
+@layer components {
+  .btn-wsp { @apply btn border border-azul bg-blanco text-azul; }
+  .btn-wsp:hover { @apply bg-niebla; }
+  .btn-wsp-claro { @apply btn border border-blanco/70 text-blanco; }
+  .btn-wsp-claro:hover { @apply border-blanco bg-blanco text-azul; }
+}
+[data-whatsapp][hidden] { display: none !important; }
+.wsp-flotante {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 56px;
+  min-width: 56px;
+  padding: 0 15px;
+  border-radius: 9999px;
+  background: #053260;
+  color: #FFFFFF;
+  font-family: Manrope, system-ui, sans-serif;
+  font-weight: 600;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 6px 18px rgb(5 50 96 / 0.28);
+  transition: opacity 250ms ease-out, transform 250ms ease-out, gap 250ms ease-out, visibility 0s;
+}
+.wsp-etiqueta {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 250ms ease-out, opacity 150ms ease-out;
+}
+.wsp-flotante:hover, .wsp-flotante:focus-visible { gap: 8px; }
+.wsp-flotante:hover .wsp-etiqueta,
+.wsp-flotante:focus-visible .wsp-etiqueta { max-width: 8rem; opacity: 1; }
+.wsp-flotante:focus-visible { outline: 2px solid #053260; outline-offset: 4px; }
+/* Con JS: aparece al pasar la portada y se oculta en Contacto y el pie (ahí ya hay acceso). */
+.wsp-activo .wsp-flotante:not([data-visible="true"]) {
+  opacity: 0;
+  transform: translateY(12px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 250ms ease-out, transform 250ms ease-out, visibility 0s linear 250ms;
+}
+@media (min-width: 768px) {
+  .wsp-flotante { right: 24px; bottom: 24px; }
+}
+
+/* En móvil el acceso a WhatsApp vive en la barra inferior, junto a cotizar. */
+@media (max-width: 767px) { .wsp-flotante { display: none; } }
+.wsp-barra {
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; flex-shrink: 0;
+  border-radius: 4px; background: #053260; color: #FFFFFF;
+}

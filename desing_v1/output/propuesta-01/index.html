@@ -6,6 +6,8 @@
   <title>Sur Eficiencia, ingeniería y consultoría</title>
   <meta name="description" content="Sur Eficiencia: ingeniería, asesoría técnica y desarrollo de proyectos. Diagnóstico térmico, topografía, pavimentación y aguas lluvias, subdivisión, y agua potable y alcantarillado.">
   <meta name="robots" content="noindex">
+  <!-- WhatsApp: número en sitio.config.json; «npm run dist» lo escribe aquí. Vacío = el botón no se muestra. -->
+  <meta name="sur-whatsapp" content="" data-mensaje="Hola, quisiera hacer una consulta a Sur Eficiencia.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
@@ -151,7 +153,8 @@
       </div>
 
       <!-- Servicio: Diagnóstico térmico — texto amplio + placeholder vertical -->
-      <article id="servicio-termico" aria-labelledby="t-termico" class="mt-16 border-t border-niebla pt-16 md:mt-24 md:pt-24">
+      <article id="servicio-termico" aria-labelledby="t-termico" class="mt-16 md:mt-24">
+        <div class="contenedor" aria-hidden="true"><hr class="mb-16 border-pizarra/20 md:mb-24"></div>
         <div class="contenedor grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div class="lg:col-span-6" data-revelar>
             <span data-icon="thermometer" data-size="32" class="text-verde"></span>
@@ -182,6 +185,7 @@
 
       <!-- Servicio: Topografía — fotografía vertical a la izquierda -->
       <article id="servicio-topografia" aria-labelledby="t-topografia" class="mt-16 md:mt-24">
+        <div class="contenedor" aria-hidden="true"><hr class="mb-16 border-pizarra/20 md:mb-24"></div>
         <div class="contenedor grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
           <figure class="lg:col-span-6" data-revelar>
             <img src="img/topografia.jpg" width="1280" height="1538" loading="lazy" alt="Dos topógrafos trabajan con una estación total sobre trípode y una libreta electrónica en una calle." class="aspect-[4/5] w-full rounded object-cover">
@@ -292,7 +296,7 @@
     </section>
 
     <!-- ============ 3. Cómo trabajamos ============ -->
-    <section id="como-trabajamos" aria-labelledby="titulo-proceso" class="border-t border-niebla py-16 md:py-24">
+    <section id="como-trabajamos" aria-labelledby="titulo-proceso" class="border-y border-pizarra/20 bg-niebla py-16 md:py-24">
       <div class="contenedor">
         <div class="max-w-lectura" data-revelar>
           <h2 id="titulo-proceso" class="text-3xl font-bold lg:text-4xl">Cómo trabajamos</h2>
@@ -319,7 +323,7 @@
     </section>
 
     <!-- ============ 4. Nosotros ============ -->
-    <section id="nosotros" aria-labelledby="titulo-nosotros" class="bg-niebla py-16 md:py-24">
+    <section id="nosotros" aria-labelledby="titulo-nosotros" class="bg-blanco py-16 md:py-24">
       <div class="contenedor grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div class="lg:col-span-5" data-revelar>
           <h2 id="titulo-nosotros" class="text-3xl font-bold lg:text-4xl">Nosotros</h2>
@@ -346,7 +350,7 @@
     </section>
 
     <!-- ============ 5. Contacto ============ -->
-    <section id="contacto" aria-labelledby="titulo-contacto" class="py-16 md:py-24">
+    <section id="contacto" aria-labelledby="titulo-contacto" class="border-t border-pizarra/20 bg-niebla py-16 md:py-24">
       <div class="contenedor grid gap-0 overflow-hidden rounded lg:grid-cols-12" data-revelar>
         <div class="sobre-azul bg-azul p-8 text-blanco md:p-12 lg:col-span-5">
           <h2 id="titulo-contacto" class="text-3xl font-bold text-blanco lg:text-4xl">Solicitar cotización</h2>
@@ -356,6 +360,11 @@
             <li class="flex gap-3"><span data-icon="check" class="shrink-0 text-hueso"></span>Qué necesita resolver</li>
             <li class="flex gap-3"><span data-icon="check" class="shrink-0 text-hueso"></span>Planos o antecedentes que ya tenga, si existen</li>
           </ul>
+          <div class="mt-8 border-t border-blanco/30 pt-6" data-whatsapp hidden>
+            <p class="font-titulo font-semibold text-blanco">¿Prefiere conversar?</p>
+            <p class="mt-1 text-blanco/85">También puede hacer su consulta por WhatsApp.</p>
+            <a href="#whatsapp" class="btn-wsp-claro mt-4" data-whatsapp target="_blank" rel="noopener"><span data-icon="whatsapp" data-size="20"></span>Escribir por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          </div>
         </div>
 
         <form id="formulario" class="border border-niebla bg-blanco p-8 md:p-12 lg:col-span-7 lg:border-l-0" novalidate aria-describedby="aviso-demo">
@@ -429,6 +438,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- WhatsApp flotante: oculto hasta configurar un número verificado -->
+  <a href="#whatsapp" class="wsp-flotante" data-whatsapp target="_blank" rel="noopener" aria-label="Escribir a Sur Eficiencia por WhatsApp (se abre en una pestaña nueva)" hidden>
+    <span data-icon="whatsapp" data-size="26"></span>
+    <span class="wsp-etiqueta">WhatsApp</span>
+  </a>
 
   <script src="vendor/icons.js"></script>
   <script src="src/main.js"></script>

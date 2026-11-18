@@ -6,6 +6,8 @@
   <title>Sur Eficiencia, ingeniería y consultoría</title>
   <meta name="description" content="Sur Eficiencia: ingeniería, asesoría técnica y desarrollo de proyectos. Diagnóstico térmico, topografía, pavimentación y aguas lluvias, subdivisión, y agua potable y alcantarillado.">
   <meta name="robots" content="noindex">
+  <!-- WhatsApp: número en sitio.config.json; «npm run dist» lo escribe aquí. Vacío = el botón no se muestra. -->
+  <meta name="sur-whatsapp" content="" data-mensaje="Hola, quisiera hacer una consulta a Sur Eficiencia.">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -381,6 +383,11 @@
             <li>Qué necesita resolver</li>
             <li>Planos o antecedentes que ya tenga, si existen</li>
           </ul>
+          <div class="mt-8 border-t border-pizarra/20 pt-6" data-whatsapp hidden>
+            <p class="font-titulo font-semibold text-azul">¿Prefiere conversar?</p>
+            <p class="mt-1 text-pizarra">También puede hacer su consulta por WhatsApp.</p>
+            <a href="#whatsapp" class="btn-wsp mt-4" data-whatsapp target="_blank" rel="noopener"><span data-icon="whatsapp" data-size="20"></span>Escribir por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          </div>
         </div>
 
         <form id="formulario" class="rounded border border-pizarra/20 bg-blanco p-6 md:p-10 lg:col-span-7 lg:col-start-6" novalidate aria-describedby="aviso-demo" data-revelar style="--retraso:120ms">
@@ -463,9 +470,16 @@
   </footer>
 
   <!-- Barra de cotización en móvil -->
-  <div id="barra-cotizar" class="barra-cotizar fixed inset-x-0 bottom-0 z-30 border-t border-pizarra/20 bg-blanco/95 px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 backdrop-blur md:hidden">
-    <a href="#contacto" class="btn-cotizar w-full" data-cotizar>Solicitar cotización</a>
+  <div id="barra-cotizar" class="barra-cotizar fixed inset-x-0 bottom-0 z-30 border-t border-pizarra/20 bg-blanco/95 px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 backdrop-blur md:hidden flex gap-3">
+    <a href="#contacto" class="btn-cotizar flex-1" data-cotizar>Solicitar cotización</a>
+    <a href="#whatsapp" class="wsp-barra" data-whatsapp target="_blank" rel="noopener" aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)" hidden><span data-icon="whatsapp" data-size="24"></span></a>
   </div>
+
+  <!-- WhatsApp flotante: oculto hasta configurar un número verificado -->
+  <a href="#whatsapp" class="wsp-flotante" data-whatsapp target="_blank" rel="noopener" aria-label="Escribir a Sur Eficiencia por WhatsApp (se abre en una pestaña nueva)" hidden>
+    <span data-icon="whatsapp" data-size="26"></span>
+    <span class="wsp-etiqueta">WhatsApp</span>
+  </a>
 
   <script src="vendor/icons.js"></script>
   <script src="src/main.js"></script>

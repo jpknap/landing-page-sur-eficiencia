@@ -9,7 +9,32 @@ Dos propuestas independientes, construidas **solo** con los documentos de `desin
 
 Ambas aplican `style-guide-summary.md` (v0.2, acento **blanco hueso `#F1EBDD`**) y el menú de `estructura navegacion.md`. No se usó nada de `desing_v2/`.
 
-## Cómo abrirlas
+## Publicar en un servidor
+
+El build listo para subir está en **`dist/`** (también comprimido en **`sur-eficiencia-desing-v1.zip`**). Es un sitio estático: no necesita PHP, Node ni base de datos.
+
+```
+dist/
+├── index.html          ← página de entrada con acceso a las dos propuestas
+├── robots.txt          ← bloquea buscadores mientras indexar=false
+├── propuesta-01/       ← index.html, styles.css, js/, vendor/, img/
+└── propuesta-02/
+```
+
+- **Subir:** copie el contenido de `dist/` a la carpeta pública del hosting (`public_html/`, `www/`, un bucket o Netlify/Vercel arrastrando la carpeta). Las rutas son relativas, así que también funciona dentro de una subcarpeta.
+- **Volver a generar** tras un cambio: `npm install` (solo la primera vez) y `npm run dist`. Eso compila el CSS, copia solo las imágenes usadas, versiona CSS y JS (`?v=hash`) para que el navegador no muestre archivos viejos, quita los comentarios internos, verifica que no haya rutas rotas y crea el `.zip`.
+- **`sitio.config.json`** controla el build:
+
+| Campo | Uso |
+|---|---|
+| `whatsapp` | Número con código de país, por ejemplo `"+56 9 1234 5678"`. **Vacío = los botones de WhatsApp no aparecen** (no se publica un enlace ficticio). |
+| `mensajeWhatsapp` | Texto con el que se abre la conversación. |
+| `indexar` | `false` (por defecto) mantiene `noindex` y `robots.txt` para revisión con el cliente; `true` para la publicación definitiva. |
+| `titulo`, `bajada`, `propuestas` | Textos de la página de entrada. |
+
+  También se puede indicar en el momento: `npm run build && node scripts/dist.mjs --whatsapp="+56 9 1234 5678"`.
+
+## Cómo revisarlas en local
 
 ```bash
 cd desing_v1/output
@@ -60,7 +85,7 @@ Stack: HTML estático + Tailwind CSS 3.4 (CLI) + íconos Lucide 0.460 (solo los 
 
 - Problema que resuelve, propuesta de valor y prueba (`essence.problem`, `value_proposition`, `proof`): se omitieron.
 - Cobertura territorial (`essence.coverage`): no se menciona ninguna zona. La foto de la vivienda tampoco se identifica por lugar.
-- **WhatsApp y correo electrónico:** no hay número ni correo verificado en los recursos, así que **no se creó ningún enlace**. La guía pide «WhatsApp siempre a mano»: falta el número.
+- **WhatsApp:** el botón está implementado, pero falta el **número verificado**: mientras `sitio.config.json` no lo tenga, no se muestra. **Correo electrónico:** sin dato, no se publica.
 - Trato usted/tú (`voice.address`).
 - Formación profesional del equipo (para «Nosotros»).
 - Fotografías reales (`imagery.source`): termogramas, subdivisiones e instalaciones sanitarias tienen placeholders explícitos.
@@ -119,3 +144,28 @@ Cambios aplicados igual en ambas propuestas, salvo donde se indica:
 - Con movimiento reducido y sin JavaScript no hay piezas ocultas.
 - El salto a `#contacto` deja el formulario visible y con foco en «Nombre».
 - El menú marca «Cómo trabajamos» al llegar a esa sección.
+
+## WhatsApp (en las dos propuestas)
+
+- **Botón flotante:** abajo a la derecha, en Azul Sur con ícono blanco y anillo blanco, para que se lea también sobre fondos azules. No compite con la acción de cotizar. Al pasar el puntero o con el foco del teclado se despliega la palabra «WhatsApp».
+  - Aparece cuando el botón de cotizar de la portada sale de la vista y se oculta en Contacto y en el pie, donde ya hay acceso.
+  - Con el menú móvil abierto también se oculta.
+- **En Contacto:** un bloque «¿Prefiere conversar?» con el botón «Escribir por WhatsApp», como pide `estructura navegacion.md` («acceso directo a WhatsApp»).
+- **Ícono:** Lucide no incluye logos de marca, así que se compuso uno en estilo línea de 2 px (burbuja + auricular), coherente con el sistema de íconos de la guía.
+- **Comportamiento:** abre `https://wa.me/<número>?text=<mensaje>` en una pestaña nueva, anunciado a lectores de pantalla.
+- **Configuración:** el número se define en `sitio.config.json`. **Sin número no se muestra ningún elemento de WhatsApp**: ni visible ni enfocable con teclado.
+
+## Iteración 3: separación de secciones
+
+Se corrigieron tramos donde dos secciones blancas quedaban seguidas y se mezclaban:
+
+| Sección | Propuesta 01 | Propuesta 02 |
+|---|---|---|
+| Portada | Blanco + banda azul de cotización | Blanco con retícula |
+| Servicios | Blanco; fichas separadas por filetes y pavimentación en niebla | **Niebla**, con el cuadro de pestañas en blanco |
+| Cómo trabajamos | **Niebla** | Blanco con retícula |
+| Nosotros | Blanco | **Niebla** |
+| Contacto | **Niebla** | Blanco |
+| Pie | Azul | Azul |
+
+Los efectos se mantienen simples: aparición al desplazar de 250 ms y transiciones de 150 ms.

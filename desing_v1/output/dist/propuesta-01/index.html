@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sur Eficiencia, ingeniería y consultoría</title>
+  <meta name="description" content="Sur Eficiencia: ingeniería, asesoría técnica y desarrollo de proyectos. Diagnóstico térmico, topografía, pavimentación y aguas lluvias, subdivisión, y agua potable y alcantarillado.">
+  <meta name="robots" content="noindex">
+  <meta name="sur-whatsapp" content="" data-mensaje="Hola, quisiera hacer una consulta a Sur Eficiencia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="styles.css?v=6f248dc8ff">
+  <link rel="preload" as="image" href="img/vivienda.jpg">
+</head>
+<body>
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-azul focus:px-4 focus:py-3 focus:text-blanco">Saltar al contenido</a>
+  
+  <header id="encabezado" class="sticky top-0 z-40 border-b border-niebla bg-blanco/95 backdrop-blur transition-shadow duration-medio">
+    <div class="contenedor flex h-16 items-center justify-between gap-6 md:h-20">
+      <a href="#inicio" class="flex shrink-0 items-center gap-3" aria-label="Sur Eficiencia, ingeniería y consultoría. Ir al inicio">
+        <img src="img/logo-isotipo.png" width="140" height="160" alt="" class="h-10 w-auto md:h-12">
+        <img src="img/logo-nombre.png" width="723" height="72" alt="" class="h-[18px] w-auto md:h-5 xl:h-[22px]">
+      </a>
+      <nav aria-label="Principal" class="hidden lg:block">
+        <ul class="flex items-center gap-1 font-titulo text-base font-semibold text-azul">
+          <li><a class="nav-link block rounded px-3 py-2 hover:bg-niebla" href="#inicio">Inicio</a></li>
+          <li class="relative">
+            <button type="button" class="nav-link flex items-center gap-1 rounded px-3 py-2 hover:bg-niebla" data-seccion="servicios" aria-expanded="false" aria-controls="submenu-servicios" data-submenu>
+              Servicios <span data-icon="chevron-down" data-size="18" class="transition-transform duration-rapido"></span>
+            </button>
+            <ul id="submenu-servicios" class="submenu absolute left-0 top-full mt-2 w-80 rounded border border-niebla bg-blanco p-2 font-texto text-base font-normal text-grafito shadow-[0_8px_24px_rgba(5,50,96,0.12)]" hidden>
+              <li><a class="flex items-center gap-3 rounded px-3 py-2 hover:bg-niebla" href="#servicio-termico"><span data-icon="thermometer" data-size="20" class="shrink-0 text-verde"></span>Diagnóstico térmico y eficiencia energética</a></li>
+              <li><a class="flex items-center gap-3 rounded px-3 py-2 hover:bg-niebla" href="#servicio-topografia"><span data-icon="mountain" data-size="20" class="shrink-0 text-verde"></span>Proyectos topográficos</a></li>
+              <li><a class="flex items-center gap-3 rounded px-3 py-2 hover:bg-niebla" href="#servicio-pavimentacion"><span data-icon="cloud-rain" data-size="20" class="shrink-0 text-verde"></span>Pavimentación y aguas lluvias</a></li>
+              <li><a class="flex items-center gap-3 rounded px-3 py-2 hover:bg-niebla" href="#servicio-subdivision"><span data-icon="land-plot" data-size="20" class="shrink-0 text-verde"></span>Subdivisión de terrenos</a></li>
+              <li><a class="flex items-center gap-3 rounded px-3 py-2 hover:bg-niebla" href="#servicio-sanitario"><span data-icon="droplet" data-size="20" class="shrink-0 text-verde"></span>Agua potable y alcantarillado</a></li>
+              <li class="mt-2 border-t border-niebla pt-2"><a class="block rounded px-3 py-2 font-semibold text-azul hover:bg-niebla" href="#servicios">Ver todos los servicios</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link block rounded px-3 py-2 hover:bg-niebla" href="#como-trabajamos">Cómo trabajamos</a></li>
+          <li><a class="nav-link block rounded px-3 py-2 hover:bg-niebla" href="#nosotros">Nosotros</a></li>
+          <li><a class="nav-link block rounded px-3 py-2 hover:bg-niebla" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="#contacto" class="btn-primario hidden md:inline-flex lg:hidden xl:inline-flex" data-cotizar>Solicitar cotización</a>
+        <button type="button" id="boton-menu" class="inline-flex h-12 w-12 items-center justify-center rounded text-azul hover:bg-niebla lg:hidden" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú">
+          <span data-icon="menu" class="icono-abrir"></span>
+          <span data-icon="x" class="icono-cerrar hidden"></span>
+        </button>
+      </div>
+    </div>
+    
+    <nav id="menu-movil" class="menu-movil border-t border-niebla bg-blanco lg:hidden" aria-label="Principal móvil" hidden>
+      <ul class="contenedor flex flex-col py-4 font-titulo text-lg font-semibold text-azul">
+        <li><a class="block border-b border-niebla py-3" href="#inicio">Inicio</a></li>
+        <li class="border-b border-niebla py-3">
+          <a class="block" href="#servicios">Servicios</a>
+          <ul class="mt-2 flex flex-col font-texto text-base font-normal text-grafito">
+            <li><a class="flex items-center gap-3 py-2" href="#servicio-termico"><span data-icon="thermometer" data-size="20" class="text-verde"></span>Diagnóstico térmico</a></li>
+            <li><a class="flex items-center gap-3 py-2" href="#servicio-topografia"><span data-icon="mountain" data-size="20" class="text-verde"></span>Topografía</a></li>
+            <li><a class="flex items-center gap-3 py-2" href="#servicio-pavimentacion"><span data-icon="cloud-rain" data-size="20" class="text-verde"></span>Pavimentación y aguas lluvias</a></li>
+            <li><a class="flex items-center gap-3 py-2" href="#servicio-subdivision"><span data-icon="land-plot" data-size="20" class="text-verde"></span>Subdivisión de terrenos</a></li>
+            <li><a class="flex items-center gap-3 py-2" href="#servicio-sanitario"><span data-icon="droplet" data-size="20" class="text-verde"></span>Agua potable y alcantarillado</a></li>
+          </ul>
+        </li>
+        <li><a class="block border-b border-niebla py-3" href="#como-trabajamos">Cómo trabajamos</a></li>
+        <li><a class="block border-b border-niebla py-3" href="#nosotros">Nosotros</a></li>
+        <li><a class="block py-3" href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="sobre-azul bg-azul">
+        <div class="contenedor py-4">
+          <a href="#contacto" class="btn-cotizar w-full" data-cotizar>Solicitar cotización</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main id="contenido">
+    
+    <section id="inicio" aria-labelledby="titulo-portada" class="relative">
+      <div class="contenedor grid gap-8 pb-12 pt-8 md:pt-12 lg:grid-cols-12 lg:gap-12 lg:pb-12 lg:pt-16">
+        <div class="entrada lg:col-span-5 lg:self-center lg:pb-12">
+          <p class="mb-6 flex items-center gap-3 font-titulo text-base font-semibold text-verde">
+            <span class="h-px w-12 bg-verde" aria-hidden="true"></span>Ingeniería y consultoría
+          </p>
+          <h1 id="titulo-portada" class="text-4xl font-bold lg:text-5xl">Ingeniería para su vivienda, su terreno y su proyecto.</h1>
+          <p class="mt-6 max-w-lectura text-lg text-grafito">Hacemos diagnóstico térmico, topografía, proyectos de pavimentación y aguas lluvias, subdivisión de terrenos, y agua potable y alcantarillado. Revisamos lo que necesita y le explicamos cada paso en lenguaje claro.</p>
+          <p class="mt-8"><a href="#servicios" class="enlace">Conocer los servicios</a></p>
+        </div>
+        <figure class="entrada entrada-2 relative lg:col-span-7">
+          <div class="overflow-hidden rounded lg:-mr-8 lg:rounded-r-none xl:mr-[calc((1200px-100vw)/2-2rem)]">
+            <img src="img/vivienda.jpg" width="1600" height="1066" alt="Casa de madera de dos pisos con torreón, techumbre verde y jardín frontal, junto a una calle residencial." class="aspect-[4/3] w-full object-cover lg:aspect-auto lg:h-[600px]" fetchpriority="high">
+          </div>
+          <figcaption class="leyenda mt-2">Imagen referencial</figcaption>
+        </figure>
+      </div>
+      
+      <div class="sobre-azul bg-azul text-blanco">
+        <div class="contenedor grid items-center gap-6 py-8 md:grid-cols-12 md:py-12">
+          <p class="font-titulo text-xl font-semibold md:col-span-8 lg:col-span-7">Cuéntenos qué necesita y preparamos una propuesta técnica para su caso.</p>
+          <div class="md:col-span-4 md:justify-self-end lg:col-span-5">
+            <a href="#contacto" class="btn-cotizar w-full md:w-auto" data-cotizar>Solicitar cotización</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="servicios" aria-labelledby="titulo-servicios" class="py-16 md:py-24">
+      <div class="contenedor">
+        <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <div class="lg:col-span-5" data-revelar>
+            <h2 id="titulo-servicios" class="text-3xl font-bold lg:text-4xl">Servicios</h2>
+            <p class="mt-4 max-w-lectura text-lg">Cinco áreas de ingeniería y asesoría técnica para particulares, empresas y organizaciones. Elija un servicio para ver qué incluye.</p>
+          </div>
+          <nav aria-label="Índice de servicios" class="lg:col-span-7" data-revelar style="--retraso:80ms">
+            <ul class="border-t border-verde">
+              <li class="border-b border-verde"><a href="#servicio-termico" class="group grid grid-cols-[auto_1fr] items-baseline gap-x-4 py-4 md:grid-cols-[auto_16rem_1fr]">
+                <span data-icon="thermometer" class="self-center text-verde"></span>
+                <span class="font-titulo text-lg font-semibold text-azul group-hover:underline group-hover:decoration-verde group-hover:underline-offset-4">Diagnóstico térmico</span>
+                <span class="col-start-2 text-pizarra md:col-start-3">Dónde pierde calor una vivienda</span></a></li>
+              <li class="border-b border-verde"><a href="#servicio-topografia" class="group grid grid-cols-[auto_1fr] items-baseline gap-x-4 py-4 md:grid-cols-[auto_16rem_1fr]">
+                <span data-icon="mountain" class="self-center text-verde"></span>
+                <span class="font-titulo text-lg font-semibold text-azul group-hover:underline group-hover:decoration-verde group-hover:underline-offset-4">Topografía</span>
+                <span class="col-start-2 text-pizarra md:col-start-3">Mediciones y planos del terreno</span></a></li>
+              <li class="border-b border-verde"><a href="#servicio-pavimentacion" class="group grid grid-cols-[auto_1fr] items-baseline gap-x-4 py-4 md:grid-cols-[auto_16rem_1fr]">
+                <span data-icon="cloud-rain" class="self-center text-verde"></span>
+                <span class="font-titulo text-lg font-semibold text-azul group-hover:underline group-hover:decoration-verde group-hover:underline-offset-4">Pavimentación y aguas lluvias</span>
+                <span class="col-start-2 text-pizarra md:col-start-3">Pavimentos, drenaje y evacuación</span></a></li>
+              <li class="border-b border-verde"><a href="#servicio-subdivision" class="group grid grid-cols-[auto_1fr] items-baseline gap-x-4 py-4 md:grid-cols-[auto_16rem_1fr]">
+                <span data-icon="land-plot" class="self-center text-verde"></span>
+                <span class="font-titulo text-lg font-semibold text-azul group-hover:underline group-hover:decoration-verde group-hover:underline-offset-4">Subdivisión de terrenos</span>
+                <span class="col-start-2 text-pizarra md:col-start-3">Antecedentes, planos y tramitación</span></a></li>
+              <li class="border-b border-verde"><a href="#servicio-sanitario" class="group grid grid-cols-[auto_1fr] items-baseline gap-x-4 py-4 md:grid-cols-[auto_16rem_1fr]">
+                <span data-icon="droplet" class="self-center text-verde"></span>
+                <span class="font-titulo text-lg font-semibold text-azul group-hover:underline group-hover:decoration-verde group-hover:underline-offset-4">Agua potable y alcantarillado</span>
+                <span class="col-start-2 text-pizarra md:col-start-3">Proyectos de instalaciones sanitarias</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      
+      <article id="servicio-termico" aria-labelledby="t-termico" class="mt-16 md:mt-24">
+        <div class="contenedor" aria-hidden="true"><hr class="mb-16 border-pizarra/20 md:mb-24"></div>
+        <div class="contenedor grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <div class="lg:col-span-6" data-revelar>
+            <span data-icon="thermometer" data-size="32" class="text-verde"></span>
+            <h3 id="t-termico" class="mt-4 text-2xl font-bold lg:text-3xl">Diagnóstico térmico y eficiencia energética</h3>
+            <p class="mt-4 max-w-lectura text-lg">La termografía es una cámara que muestra por dónde se escapa el calor de la vivienda. Con esa lectura identificamos los puntos débiles de la envolvente y le explicamos qué conviene mejorar.</p>
+            <p class="mt-4 max-w-lectura">El informe indica dónde se pierde calor y qué mejoras se recomiendan.</p>
+            <h4 class="mt-8 font-titulo text-base font-semibold text-azul">Qué incluye</h4>
+            <ul class="mt-2 max-w-lectura border-t border-verde">
+              <li class="border-b border-niebla py-3">Inspección con termografía</li>
+              <li class="border-b border-niebla py-3">Identificación de pérdidas de calor</li>
+              <li class="border-b border-niebla py-3">Detección de puentes térmicos: zonas donde el calor atraviesa la estructura con más facilidad</li>
+              <li class="border-b border-niebla py-3">Revisión de problemas de aislación</li>
+              <li class="border-b border-niebla py-3">Recomendaciones de mejoramiento térmico</li>
+            </ul>
+            <a href="#contacto" class="btn-primario mt-8" data-cotizar data-servicio="termico">Solicitar cotización</a>
+          </div>
+          <figure class="lg:col-span-5 lg:col-start-8" data-revelar style="--retraso:80ms">
+            <div class="placeholder-foto aspect-[4/5]">
+              <svg viewBox="0 0 200 250" class="h-3/5 w-3/5 text-pizarra" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                <path d="M30 110 L100 50 L170 110 V210 H30 Z"/><path d="M85 210 V160 H115 V210"/><rect x="48" y="125" width="28" height="24"/><rect x="124" y="125" width="28" height="24"/>
+                <path d="M30 110 L100 50 L170 110" stroke-dasharray="3 4" transform="translate(0 -10)"/>
+              </svg>
+              <p class="absolute inset-x-0 bottom-0 p-4 text-center text-sm text-pizarra">Espacio para un termograma de una inspección de Sur Eficiencia</p>
+            </div>
+          </figure>
+        </div>
+      </article>
+      
+      <article id="servicio-topografia" aria-labelledby="t-topografia" class="mt-16 md:mt-24">
+        <div class="contenedor" aria-hidden="true"><hr class="mb-16 border-pizarra/20 md:mb-24"></div>
+        <div class="contenedor grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
+          <figure class="lg:col-span-6" data-revelar>
+            <img src="img/topografia.jpg" width="1280" height="1538" loading="lazy" alt="Dos topógrafos trabajan con una estación total sobre trípode y una libreta electrónica en una calle." class="aspect-[4/5] w-full rounded object-cover">
+            <figcaption class="leyenda mt-2">Imagen referencial</figcaption>
+          </figure>
+          <div class="lg:col-span-5 lg:col-start-8 lg:pb-12" data-revelar style="--retraso:80ms">
+            <span data-icon="mountain" data-size="32" class="text-verde"></span>
+            <h3 id="t-topografia" class="mt-4 text-2xl font-bold lg:text-3xl">Proyectos topográficos</h3>
+            <p class="mt-4 max-w-lectura text-lg">Medimos el terreno y llevamos esa información a planos. Es la base para diseñar, subdividir o construir con datos del lugar.</p>
+            <h4 class="mt-8 font-titulo text-base font-semibold text-azul">Qué incluye</h4>
+            <ul class="mt-2 border-t border-verde">
+              <li class="border-b border-niebla py-3">Levantamientos topográficos</li>
+              <li class="border-b border-niebla py-3">Planos del terreno</li>
+              <li class="border-b border-niebla py-3">Mediciones de terrenos</li>
+              <li class="border-b border-niebla py-3">Apoyo técnico para proyectos</li>
+            </ul>
+            <a href="#contacto" class="btn-primario mt-8" data-cotizar data-servicio="topografia">Solicitar cotización</a>
+          </div>
+        </div>
+      </article>
+      
+      <article id="servicio-pavimentacion" aria-labelledby="t-pavimentacion" class="mt-16 bg-niebla py-16 md:mt-24 md:py-24">
+        <div class="contenedor">
+          <div class="grid gap-8 lg:grid-cols-12 lg:gap-12" data-revelar>
+            <div class="lg:col-span-5">
+              <span data-icon="cloud-rain" data-size="32" class="text-verde"></span>
+              <h3 id="t-pavimentacion" class="mt-4 text-2xl font-bold lg:text-3xl">Proyectos de pavimentación y aguas lluvias</h3>
+            </div>
+            <div class="lg:col-span-6 lg:col-start-7">
+              <p class="max-w-lectura text-lg">Un pavimento funciona bien cuando también resuelve qué pasa con el agua. Desarrollamos el proyecto de pavimentación junto con la forma de recoger y evacuar las aguas lluvias.</p>
+            </div>
+          </div>
+          <div class="mt-12 grid gap-4 md:grid-cols-12 md:gap-6">
+            <figure class="md:col-span-8" data-revelar>
+              <img src="img/pavimentacion.jpg" width="1600" height="1200" loading="lazy" alt="Máquina pavimentadora extiende una capa de asfalto en una vía, junto a un minicargador." class="aspect-[3/2] w-full rounded object-cover">
+              <figcaption class="leyenda mt-2">Imagen referencial</figcaption>
+            </figure>
+            <figure class="md:col-span-4 md:self-end" data-revelar style="--retraso:80ms">
+              <img src="img/aguas-lluvias.jpg" width="1600" height="1067" loading="lazy" alt="Excavación con un sumidero de aguas lluvias y su tubería de conexión antes del relleno." class="aspect-[4/5] w-full rounded object-cover">
+              <figcaption class="leyenda mt-2">Imagen referencial</figcaption>
+            </figure>
+          </div>
+          <div class="mt-12 grid gap-8 md:grid-cols-12 md:items-end" data-revelar>
+            <div class="md:col-span-8">
+              <h4 class="font-titulo text-base font-semibold text-azul">Qué incluye</h4>
+              <ul class="mt-2 grid border-t border-verde sm:grid-cols-3 sm:gap-6 sm:border-t-0">
+                <li class="border-b border-pizarra/30 py-3 sm:border-b-0 sm:border-t sm:border-verde">Proyectos de pavimentación</li>
+                <li class="border-b border-pizarra/30 py-3 sm:border-b-0 sm:border-t sm:border-verde">Soluciones de drenaje</li>
+                <li class="border-b border-pizarra/30 py-3 sm:border-b-0 sm:border-t sm:border-verde">Evacuación de aguas lluvias</li>
+              </ul>
+            </div>
+            <div class="md:col-span-4 md:justify-self-end">
+              <a href="#contacto" class="btn-primario" data-cotizar data-servicio="pavimentacion">Solicitar cotización</a>
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <div class="contenedor mt-16 grid gap-16 md:mt-24 lg:grid-cols-2 lg:gap-0">
+        <article id="servicio-subdivision" aria-labelledby="t-subdivision" class="lg:border-r lg:border-verde lg:pr-12" data-revelar>
+          <figure>
+            <div class="placeholder-foto aspect-[3/2]">
+              <svg viewBox="0 0 240 160" class="h-3/5 w-3/5 text-pizarra" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                <path d="M20 30 L210 20 L225 140 L30 145 Z"/><path d="M85 27 L92 143" stroke-dasharray="4 4"/><path d="M150 23 L160 141" stroke-dasharray="4 4"/>
+                <circle cx="20" cy="30" r="3"/><circle cx="210" cy="20" r="3"/><circle cx="225" cy="140" r="3"/><circle cx="30" cy="145" r="3"/>
+              </svg>
+              <p class="absolute inset-x-0 bottom-0 p-4 text-center text-sm text-pizarra">Espacio para fotografía de un terreno o plano de subdivisión</p>
+            </div>
+          </figure>
+          <span data-icon="land-plot" data-size="32" class="mt-8 block text-verde"></span>
+          <h3 id="t-subdivision" class="mt-4 text-2xl font-bold">Proyectos de subdivisión de terrenos</h3>
+          <p class="mt-4 max-w-lectura text-lg">Para dividir un terreno se necesitan antecedentes técnicos, planos y un trámite ordenado. Preparamos esa documentación y acompañamos su tramitación.</p>
+          <h4 class="mt-8 font-titulo text-base font-semibold text-azul">Qué incluye</h4>
+          <ul class="mt-2 border-t border-verde">
+            <li class="border-b border-niebla py-3">Elaboración de antecedentes técnicos</li>
+            <li class="border-b border-niebla py-3">Planos de subdivisión</li>
+            <li class="border-b border-niebla py-3">Tramitación del proyecto</li>
+          </ul>
+          <a href="#contacto" class="btn-primario mt-8" data-cotizar data-servicio="subdivision">Solicitar cotización</a>
+        </article>
+        <article id="servicio-sanitario" aria-labelledby="t-sanitario" class="lg:pl-12" data-revelar style="--retraso:80ms">
+          <figure>
+            <div class="placeholder-foto aspect-[3/2]">
+              <svg viewBox="0 0 240 160" class="h-3/5 w-3/5 text-pizarra" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                <path d="M20 50 H150 V120 H220"/><path d="M20 62 H138 V132 H220"/><circle cx="144" cy="56" r="10"/><path d="M60 40 V50 M100 40 V50" />
+                <path d="M20 100 H90" stroke-dasharray="4 4"/>
+              </svg>
+              <p class="absolute inset-x-0 bottom-0 p-4 text-center text-sm text-pizarra">Espacio para fotografía de una instalación sanitaria</p>
+            </div>
+          </figure>
+          <span data-icon="droplet" data-size="32" class="mt-8 block text-verde"></span>
+          <h3 id="t-sanitario" class="mt-4 text-2xl font-bold">Proyectos de agua potable y alcantarillado</h3>
+          <p class="mt-4 max-w-lectura text-lg">Elaboramos y desarrollamos proyectos de instalaciones sanitarias: cómo llega el agua potable y cómo se conducen las aguas servidas.</p>
+          <h4 class="mt-8 font-titulo text-base font-semibold text-azul">Qué incluye</h4>
+          <ul class="mt-2 border-t border-verde">
+            <li class="border-b border-niebla py-3">Elaboración de proyectos de instalaciones sanitarias</li>
+            <li class="border-b border-niebla py-3">Desarrollo del proyecto de agua potable</li>
+            <li class="border-b border-niebla py-3">Desarrollo del proyecto de alcantarillado</li>
+          </ul>
+          <a href="#contacto" class="btn-primario mt-8" data-cotizar data-servicio="sanitario">Solicitar cotización</a>
+        </article>
+      </div>
+    </section>
+    
+    <section id="como-trabajamos" aria-labelledby="titulo-proceso" class="border-y border-pizarra/20 bg-niebla py-16 md:py-24">
+      <div class="contenedor">
+        <div class="max-w-lectura" data-revelar>
+          <h2 id="titulo-proceso" class="text-3xl font-bold lg:text-4xl">Cómo trabajamos</h2>
+          <p class="mt-4 text-lg">Antes de cotizar, entendemos bien lo que necesita. Son tres pasos.</p>
+        </div>
+        <ol class="mt-12 grid gap-8 md:grid-cols-3 md:gap-0">
+          <li class="relative border-l border-verde pl-6 md:border-l-0 md:border-t md:pl-0 md:pr-8 md:pt-8" data-revelar style="--retraso:0ms">
+            <span class="tabular font-titulo text-3xl font-bold text-verde" aria-hidden="true">1</span>
+            <h3 class="mt-2 text-xl font-semibold">Consulta inicial</h3>
+            <p class="mt-2 max-w-lectura">Nos cuenta qué necesita, dónde está la vivienda o el terreno y en qué etapa va su proyecto.</p>
+          </li>
+          <li class="relative border-l border-verde pl-6 md:border-l-0 md:border-t md:pl-0 md:pr-8 md:pt-8" data-revelar style="--retraso:80ms">
+            <span class="tabular font-titulo text-3xl font-bold text-verde" aria-hidden="true">2</span>
+            <h3 class="mt-2 text-xl font-semibold">Revisión del requerimiento</h3>
+            <p class="mt-2 max-w-lectura">Revisamos los antecedentes disponibles y le hacemos las preguntas necesarias para definir el alcance.</p>
+          </li>
+          <li class="relative border-l border-verde pl-6 md:border-l-0 md:border-t md:pl-0 md:pt-8" data-revelar style="--retraso:160ms">
+            <span class="tabular font-titulo text-3xl font-bold text-verde" aria-hidden="true">3</span>
+            <h3 class="mt-2 text-xl font-semibold">Propuesta técnica</h3>
+            <p class="mt-2 max-w-lectura">Le enviamos una propuesta con el trabajo a realizar y su cotización.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+    
+    <section id="nosotros" aria-labelledby="titulo-nosotros" class="bg-blanco py-16 md:py-24">
+      <div class="contenedor grid gap-8 lg:grid-cols-12 lg:gap-12">
+        <div class="lg:col-span-5" data-revelar>
+          <h2 id="titulo-nosotros" class="text-3xl font-bold lg:text-4xl">Nosotros</h2>
+          <p class="mt-4 max-w-lectura text-lg">Sur Eficiencia es un emprendimiento de ingeniería y consultoría. Desarrollamos proyectos y asesoría técnica para particulares, empresas y organizaciones.</p>
+        </div>
+        <div class="lg:col-span-6 lg:col-start-7" data-revelar style="--retraso:80ms">
+          <h3 class="font-titulo text-xl font-semibold">Nuestro enfoque</h3>
+          <dl class="mt-4 border-t border-verde">
+            <div class="grid gap-1 border-b border-pizarra/30 py-4 sm:grid-cols-[12rem_1fr] sm:gap-6">
+              <dt class="font-titulo font-semibold text-azul">Claridad técnica</dt>
+              <dd>Usamos términos técnicos cuando hacen falta y explicamos qué significan.</dd>
+            </div>
+            <div class="grid gap-1 border-b border-pizarra/30 py-4 sm:grid-cols-[12rem_1fr] sm:gap-6">
+              <dt class="font-titulo font-semibold text-azul">Datos medidos</dt>
+              <dd>Las recomendaciones se apoyan en lo que se mide y se revisa en terreno.</dd>
+            </div>
+            <div class="grid gap-1 border-b border-pizarra/30 py-4 sm:grid-cols-[12rem_1fr] sm:gap-6">
+              <dt class="font-titulo font-semibold text-azul">Trato directo</dt>
+              <dd>Conversamos con usted en cada etapa, en un lenguaje llano.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contacto" aria-labelledby="titulo-contacto" class="border-t border-pizarra/20 bg-niebla py-16 md:py-24">
+      <div class="contenedor grid gap-0 overflow-hidden rounded lg:grid-cols-12" data-revelar>
+        <div class="sobre-azul bg-azul p-8 text-blanco md:p-12 lg:col-span-5">
+          <h2 id="titulo-contacto" class="text-3xl font-bold text-blanco lg:text-4xl">Solicitar cotización</h2>
+          <p class="mt-4 max-w-lectura text-lg">Indique el servicio y describa brevemente su caso. Con esa información preparamos la revisión inicial.</p>
+          <ul class="mt-8 space-y-4 border-t border-blanco/30 pt-8">
+            <li class="flex gap-3"><span data-icon="check" class="shrink-0 text-hueso"></span>Ubicación aproximada de la vivienda o el terreno</li>
+            <li class="flex gap-3"><span data-icon="check" class="shrink-0 text-hueso"></span>Qué necesita resolver</li>
+            <li class="flex gap-3"><span data-icon="check" class="shrink-0 text-hueso"></span>Planos o antecedentes que ya tenga, si existen</li>
+          </ul>
+          <div class="mt-8 border-t border-blanco/30 pt-6" data-whatsapp hidden>
+            <p class="font-titulo font-semibold text-blanco">¿Prefiere conversar?</p>
+            <p class="mt-1 text-blanco/85">También puede hacer su consulta por WhatsApp.</p>
+            <a href="#whatsapp" class="btn-wsp-claro mt-4" data-whatsapp target="_blank" rel="noopener"><span data-icon="whatsapp" data-size="20"></span>Escribir por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          </div>
+        </div>
+        <form id="formulario" class="border border-niebla bg-blanco p-8 md:p-12 lg:col-span-7 lg:border-l-0" novalidate aria-describedby="aviso-demo">
+          <div class="grid gap-6 md:grid-cols-2">
+            <div>
+              <label for="nombre" class="campo-label">Nombre</label>
+              <input id="nombre" name="nombre" type="text" class="campo" autocomplete="name" required aria-describedby="error-nombre">
+              <p id="error-nombre" class="campo-error" hidden><span data-icon="circle-alert" data-size="18" class="mt-px shrink-0"></span><span>Ingrese su nombre.</span></p>
+            </div>
+            <div>
+              <label for="correo" class="campo-label">Correo electrónico</label>
+              <input id="correo" name="correo" type="email" class="campo" autocomplete="email" inputmode="email" required aria-describedby="error-correo">
+              <p id="error-correo" class="campo-error" hidden><span data-icon="circle-alert" data-size="18" class="mt-px shrink-0"></span><span>Ingrese un correo válido, por ejemplo nombre@dominio.cl.</span></p>
+            </div>
+            <div class="md:col-span-2">
+              <label for="servicio" class="campo-label">Servicio</label>
+              <select id="servicio" name="servicio" class="campo appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 fill=%22none%22 stroke=%22%23053260%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-[right_12px_center] bg-no-repeat pr-12" required aria-describedby="error-servicio">
+                <option value="">Seleccione un servicio</option>
+                <option value="termico">Diagnóstico térmico y eficiencia energética</option>
+                <option value="topografia">Proyectos topográficos</option>
+                <option value="pavimentacion">Pavimentación y aguas lluvias</option>
+                <option value="subdivision">Subdivisión de terrenos</option>
+                <option value="sanitario">Agua potable y alcantarillado</option>
+                <option value="otro">Otro o no estoy seguro</option>
+              </select>
+              <p id="error-servicio" class="campo-error" hidden><span data-icon="circle-alert" data-size="18" class="mt-px shrink-0"></span><span>Seleccione el servicio que necesita.</span></p>
+            </div>
+            <div class="md:col-span-2">
+              <label for="mensaje" class="campo-label">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="5" class="campo" required minlength="10" aria-describedby="ayuda-mensaje error-mensaje"></textarea>
+              <p id="ayuda-mensaje" class="mt-2 text-sm text-pizarra">Cuéntenos qué necesita resolver.</p>
+              <p id="error-mensaje" class="campo-error" hidden><span data-icon="circle-alert" data-size="18" class="mt-px shrink-0"></span><span>Escriba un mensaje de al menos 10 caracteres.</span></p>
+            </div>
+          </div>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <button type="submit" class="btn-primario whitespace-nowrap">Enviar solicitud</button>
+            <p id="aviso-demo" class="flex items-center gap-2 text-sm text-pizarra"><span data-icon="info" data-size="18" class="shrink-0"></span>Versión de demostración: este formulario aún no envía mensajes.</p>
+          </div>
+          <div id="estado-formulario" class="mt-6" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="sobre-azul bg-azul text-blanco">
+    <div class="contenedor grid gap-8 py-12 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <div class="inline-block rounded bg-blanco px-6 py-4">
+          <img src="img/logo.png" width="640" height="390" loading="lazy" alt="Sur Eficiencia, ingeniería y consultoría" class="h-auto w-56 md:w-60">
+        </div>
+      </div>
+      <nav aria-label="Pie de página" class="md:col-span-4">
+        <ul class="grid grid-cols-2 gap-x-6 gap-y-2">
+          <li><a class="hover:underline" href="#inicio">Inicio</a></li>
+          <li><a class="hover:underline" href="#servicios">Servicios</a></li>
+          <li><a class="hover:underline" href="#como-trabajamos">Cómo trabajamos</a></li>
+          <li><a class="hover:underline" href="#nosotros">Nosotros</a></li>
+          <li><a class="hover:underline" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="md:col-span-3 md:justify-self-end">
+        <a href="#contacto" class="btn-cotizar" data-cotizar>Solicitar cotización</a>
+      </div>
+    </div>
+    <div class="border-t border-blanco/20">
+      <div class="contenedor flex flex-col gap-2 py-4 text-sm text-blanco/90 sm:flex-row sm:justify-between">
+        <p>© <span class="tabular" id="anio">2026</span> Sur Eficiencia</p>
+        <p>Propuesta 01. Las imágenes son referenciales.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <a href="#whatsapp" class="wsp-flotante" data-whatsapp target="_blank" rel="noopener" aria-label="Escribir a Sur Eficiencia por WhatsApp (se abre en una pestaña nueva)" hidden>
+    <span data-icon="whatsapp" data-size="26"></span>
+    <span class="wsp-etiqueta">WhatsApp</span>
+  </a>
+  <script src="vendor/icons.js?v=f5bc4d7f9c"></script>
+  <script src="js/main.js?v=697a3d9b7f"></script>
+</body>
+</html>
