@@ -1,17 +1,13 @@
 # Sur Eficiencia: propuestas web (desing_v2)
 
-Dos propuestas construidas **solo** con los documentos de `desing_v2/`:
+Dos propuestas construidas **solo** con los documentos de `desing_v2/` e **independientes de `desing_v1/output`**: comparten contenido y requisitos, pero no su diseño.
 
 | Carpeta | Brief | Dirección |
 |---|---|---|
 | `propuesta-01/` | `desing_v2/desing_prompt_v1.md` | Editorial y fotográfica, sin 3D |
 | `propuesta-02/` | `desing_v2/desing_prompt_v2.md` | Arquitectónica y técnica, con una escena Three.js en la portada |
 
-**Guía aplicada:** `desing_v2/style-guide-summary.md` (v0.2). Su diferencia con la de v1 es el acento: **Turquesa Cotizar `#2BB3C0`**, reservado a la acción de cotizar, con texto Azul Sur `#053260` encima (5,09:1). El blanco hueso de la v1 no aparece en ningún archivo de esta carpeta.
-
-Los prompts de `desing_v2` todavía mencionan el «blanco hueso». Como indican que la guía es la fuente de verdad para los colores, se aplicó el turquesa con la función que la guía le asigna.
-
-Se parte de la estructura ya validada en `desing_v1/output` (iteración 2 incluida). Cada propuesta suma cambios propios de experiencia de usuario, así que ya no son iguales a las de v1.
+**Guía aplicada:** `desing_v2/style-guide-summary.md` (v0.2), con acento **Turquesa Cotizar `#2BB3C0`** reservado a la acción de cotizar y texto Azul Sur encima (5,09:1). Los prompts todavía mencionan «blanco hueso», pero declaran la guía como fuente de verdad para los colores, así que se aplicó el turquesa. El blanco hueso no aparece en ningún archivo de esta carpeta.
 
 ## Cómo abrirlas
 
@@ -24,46 +20,73 @@ npm run logo         # recortes del logo desde /logo.png (requiere Pillow)
 ```
 
 - **Propuesta 01** también se puede abrir con doble clic en `index.html`.
-- **Propuesta 02** necesita `npm run serve` para la escena 3D. Si se abre con doble clic, muestra la alternativa estática y el resto funciona igual.
+- **Propuesta 02** necesita `npm run serve` para la escena 3D. Con doble clic muestra la alternativa estática y todo lo demás funciona igual.
 
-Stack: HTML estático + Tailwind CSS 3.4 + íconos Lucide 0.460 (solo los usados) + Three.js 0.170 (solo en la 02).
+Stack: HTML estático + Tailwind CSS 3.4 + íconos Lucide 0.460 (solo los usados) + Three.js 0.170 (solo en la 02). `src/main.js` es el mismo archivo en ambas propuestas y cada módulo se activa solo si su elemento existe.
 
-## Uso del turquesa
+## Separación entre secciones
 
-- **Todas las acciones «Solicitar cotización»** usan el turquesa: encabezado, portada, cada servicio, cajetín, barra móvil, pie y el botón «Enviar solicitud». A diferencia de la v1, la guía no limita el acento a fondos azules, así que también va sobre blanco y niebla.
-- Para que el color mantenga su función, **ningún otro elemento** usa turquesa. Íconos, foco y detalles sobre azul van en blanco. El modelo 3D tampoco lo usa.
-- **Hover:** el botón se subraya en lugar de cambiar de color, para no salir de la paleta.
-- **Contraste:** el par de texto azul sobre turquesa da 5,09:1 (AA). El borde del botón contra el blanco queda en torno a 2,4:1, pero el botón se identifica por su texto azul. Si se quiere reforzar, se le puede agregar un filete azul de 1 px.
+Cada sección tiene un fondo distinto de la anterior, con un filete de 1 px donde dos fondos claros se tocan. Así ningún bloque se funde con el siguiente:
 
-## Cambios propios de esta versión
+| Sección | Propuesta 01 | Propuesta 02 |
+|---|---|---|
+| Portada | Blanco | **Azul, plano con retícula** y regla graduada |
+| Servicios | **Niebla** | Blanco |
+| Cómo trabajamos | **Azul** | **Niebla con retícula** |
+| Nosotros | Blanco | Blanco |
+| Contacto | **Niebla** | **Azul, plano** |
+| Pie | **Azul** (logo sobre placa blanca) | Blanco (logo a color) + franja niebla |
 
-### Propuesta 01: editorial y fotográfica
-- **Portada sobre Azul Sur** («fondos institucionales» en la guía), con titular blanco, la fotografía a sangre a la derecha y «Solicitar cotización» en turquesa dentro de la misma portada. Desaparece la banda separada de la v1. **Efecto en la experiencia:** en móvil la acción principal queda en el primer pantallazo, antes de la foto; en la v1 quedaba después de la imagen.
-- El resto conserva la composición editorial: índice de servicios con filetes, una composición por servicio, pasos, nosotros y formulario.
+## Propuesta 01: editorial y fotográfica
 
-### Propuesta 02: arquitectónica y técnica
-- **Pestañas de servicios en todos los tamaños.** En móvil la lista de servicios queda arriba y se ve un servicio a la vez, en lugar de cinco paneles largos apilados. Si el panel elegido queda fuera de la vista, la página se acerca suavemente (o al instante con movimiento reducido). Los enlaces de servicios del menú móvil abren su pestaña. Sin JavaScript se oculta la lista y se leen los cinco paneles.
-- **«Cómo trabajamos» como banda Azul Sur** con retícula clara, nodos y línea de perfil en blanco. La línea se traza al aparecer.
-- Se quitaron los íconos repetidos en los títulos de los paneles, porque la pestaña ya los muestra.
+- **Portada:** titular editorial grande a la izquierda y, a la derecha, el texto con «Solicitar cotización». Debajo va un **tríptico fotográfico** (Viviendas, Terreno, Infraestructura) que resume los ámbitos de trabajo, cada foto con su leyenda «Imagen referencial».
+- **Servicios con índice fijo:**
+  - En escritorio, la columna izquierda queda fija con el título y un índice que marca el servicio que se está leyendo. A la derecha, las fichas de cada servicio están separadas por filetes, sin tarjetas.
+  - En móvil, el índice pasa a una fila deslizable fija bajo el encabezado y el chip activo se centra solo.
+  - Cada ficha tiene fotografía (recortes de detalle, para no repetir las del tríptico) o una ilustración técnica, descripción, «Qué incluye» con marcas de verificación y su botón de cotizar.
+- **Cómo trabajamos:** banda azul con tres pasos numerados. Una línea blanca se traza uniéndolos y los pasos aparecen en orden.
+- **Nosotros:** declaración tipográfica amplia y tres principios con íconos.
+- **Contacto:** formulario de **una columna**, más rápido de completar, con el botón de envío a todo el ancho.
+- **Progreso de lectura:** un filete verde bajo el encabezado avanza con el desplazamiento.
 
-### Ambas
-- **Barra fija de cotización en móvil** (<768 px). Aparece cuando la portada sale de la vista y se oculta al llegar al formulario, en el pie y con el menú abierto. Respeta el área segura de iPhone (`viewport-fit=cover`) y el formulario no queda tapado (`scroll-padding-bottom`). Al usarla, lleva a `#contacto` y pone el foco en «Nombre».
-- Se mantiene lo de la iteración 2 de v1:
-  - Logo del cliente: horizontal en el encabezado, completo sobre superficie blanca en el pie, isotipo como favicon.
-  - Aparición suave al desplazar, 250 ms, que nunca oculta contenido sin JS ni con movimiento reducido.
-  - Sección activa marcada en el menú.
-  - Validación accesible del formulario.
-  - Escena 3D con alternativa estática.
+## Propuesta 02: arquitectónica y técnica
+
+- **Portada en plano azul:** retícula de 24/96 px, regla graduada en el borde y la volumetría 3D a la derecha con la leyenda «Visualización conceptual».
+  - Los techos llevan aristas blancas para leerse sobre el azul.
+  - La alternativa estática (SVG isométrico) tiene la misma composición y colores.
+  - Mantiene el render bajo demanda, la pausa fuera de pantalla o con la pestaña oculta, el `pixelRatio` ≤ 1,5, la liberación de recursos y la imagen estática en móvil, con movimiento reducido o sin WebGL.
+- **«Cuadro de servicios»:** una tabla desplegable (acordeón).
+  - **Filas:** cada una muestra ícono, nombre, un resumen y un control +/–. Al abrirse, el contenido se despliega en 250 ms con la imagen o ilustración, la descripción, la tabla de prestaciones y el botón de cotizar.
+  - **Apertura:** la primera fila viene abierta. Los enlaces del menú, del submenú y del pie abren la fila correspondiente.
+  - **Accesibilidad:** cada fila es un botón con `aria-expanded` y `role="region"`. El contenido cerrado no recibe foco, y sin JavaScript todas las filas quedan abiertas.
+- **Cómo trabajamos sobre ejes de plano:** burbujas numeradas como ejes de un plano estructural, unidas por una cota que se traza al aparecer. Bajo cada burbuja, un eje punteado baja hasta su contenido.
+- **Nosotros:** tabla de principios con íconos.
+- **Contacto:** sobre plano azul, con el formulario en un panel blanco con encabezado («Solicitud de cotización · Todos los campos son obligatorios»).
+- **Pie blanco:** el logo a color sobre su fondo natural.
+
+## Animaciones (orientadas a transmitir seguridad)
+
+- **Siempre iguales y predecibles:** fundido + 16 px hacia arriba, **250 ms ease-out** (token de la guía), en secuencias ordenadas con 60–120 ms entre piezas. No hay rebotes, giros ni paralaje.
+- **Movimiento que muestra estructura:** las fotos de la 01 se descubren de abajo hacia arriba sin filtros, y las líneas de proceso de ambas se trazan en el orden de lectura.
+- **Respuesta a cada acción:** subrayado o filete en el menú, contorno azul en el botón turquesa al pasar el puntero y leve hundimiento al presionar, +/– en el acordeón, halo azul en los campos con foco y errores con ícono y texto.
+- **El contenido nunca queda oculto:** sin JavaScript, con `prefers-reduced-motion: reduce`, al imprimir o si el foco del teclado llega a una pieza aún no revelada, todo se muestra al instante.
+
+## Experiencia de usuario común
+
+- **Barra de cotización en móvil:** aparece al pasar la portada y se oculta en el formulario, en el pie y con el menú abierto. Respeta el área segura del iPhone.
+- **Navegación:** la sección activa se marca en el menú, el menú móvil se cierra al elegir un enlace y tiene desplazamiento propio en pantallas bajas, y el submenú se cierra con Esc o con clic fuera.
+- **Cotizar:** cada botón de servicio preselecciona ese servicio en el formulario y lleva el foco a «Nombre».
+- **Formulario:** validación accesible que enfoca el primer error. Con datos válidos avisa que es una demostración y **no simula un envío**.
 
 ## Suposiciones
 
 1. **Trato:** se usa «usted» (`voice.address` está pendiente).
 2. **Logo:** la versión horizontal del encabezado (isotipo + nombre, sin bajada) es una derivación del logo apilado. Debe validarla el cliente.
 3. **Prestaciones:** solo las de `estructura navegacion.md`. «Nosotros» no menciona formación profesional porque no hay datos.
-4. **Formulario:** no hay backend. La página avisa que es una demostración y no simula un envío exitoso.
-5. **«Cómo trabajamos»** (consulta inicial → revisión del requerimiento → propuesta técnica): **es contenido propuesto y debe validarse.**
-6. **Menú:** Inicio, Servicios (con los cinco servicios), Cómo trabajamos, Nosotros y Contacto.
-7. **Encabezado entre 1024 y 1199 px:** el botón de cotizar del encabezado se oculta porque no cabe. La acción sigue en la portada.
+4. **«Cómo trabajamos»** (consulta inicial → revisión del requerimiento → propuesta técnica): **es contenido propuesto y debe validarse.**
+5. **Ilustraciones:** subdivisión y agua potable y alcantarillado no tienen fotografía con licencia adecuada, así que llevan **ilustraciones técnicas** rotuladas «Ilustración referencial». No representan proyectos reales.
+6. **Botón turquesa sobre blanco:** el borde contrasta unos 2,4:1 con el fondo. El botón se identifica por su texto azul (5,09:1) y en hover gana un contorno azul de 2 px.
+7. **Encabezado entre 1024 y 1199 px:** el botón de cotizar del encabezado se oculta porque no cabe junto al menú. La acción sigue en la portada y en cada servicio.
 
 ## Contenido por validar con el cliente
 
@@ -73,29 +96,13 @@ Stack: HTML estático + Tailwind CSS 3.4 + íconos Lucide 0.460 (solo los usados
 
 ## Imágenes referenciales (Wikimedia Commons)
 
-Llevan la leyenda visible «Imagen referencial», sin filtros. No representan trabajos de Sur Eficiencia.
+Sin filtros ni capas de color, solo recortadas. Los recortes `*-detalle.jpg` salen de los mismos originales. No representan trabajos de Sur Eficiencia.
 
 | Archivo | Original | Autor | Licencia |
 |---|---|---|---|
-| `img/vivienda.jpg` | [File:Casa K1.JPG](https://commons.wikimedia.org/wiki/File:Casa_K1.JPG) | Ccaba77 (Christian Caba) | CC BY-SA 3.0 |
-| `img/topografia.jpg` | [File:Trimble Total Station DR 200 01 (fcm).jpg](https://commons.wikimedia.org/wiki/File:Trimble_Total_Station_DR_200_01_(fcm).jpg) | Frank C. Müller | CC BY-SA 4.0 |
-| `img/pavimentacion.jpg` | [File:Asphalt paving.jpg](https://commons.wikimedia.org/wiki/File:Asphalt_paving.jpg) | Stevolala1 | CC BY-SA 4.0 |
+| `img/vivienda.jpg`, `img/vivienda-detalle.jpg` | [File:Casa K1.JPG](https://commons.wikimedia.org/wiki/File:Casa_K1.JPG) | Ccaba77 (Christian Caba) | CC BY-SA 3.0 |
+| `img/topografia.jpg`, `img/topografia-detalle.jpg` | [File:Trimble Total Station DR 200 01 (fcm).jpg](https://commons.wikimedia.org/wiki/File:Trimble_Total_Station_DR_200_01_(fcm).jpg) | Frank C. Müller | CC BY-SA 4.0 |
+| `img/pavimentacion.jpg`, `img/pavimentacion-detalle.jpg` | [File:Asphalt paving.jpg](https://commons.wikimedia.org/wiki/File:Asphalt_paving.jpg) | Stevolala1 | CC BY-SA 4.0 |
 | `img/aguas-lluvias.jpg` | [File:Storm drain pipe.JPG](https://commons.wikimedia.org/wiki/File:Storm_drain_pipe.JPG) | Anonimski | CC0 |
 
-Las licencias CC BY-SA exigen atribución si se publica. Lo recomendable es reemplazarlas por fotos propias.
-
-## Comprobaciones realizadas
-
-Chrome headless (Playwright) a 390, 1024, 1280 y 1440 px:
-
-- Sin desbordamiento horizontal, sin errores de consola, logos cargados y botones de cotizar en `rgb(43, 179, 192)`.
-- Todas las piezas con aparición quedan visibles tras desplazar. Con movimiento reducido y sin JavaScript no hay piezas ocultas.
-- **Barra móvil:** oculta en la portada, en el formulario y con el menú abierto; visible en Servicios y en Cómo trabajamos. Al usarla, va a `#contacto` con foco en «Nombre».
-- **Menús:** el menú móvil se cierra al elegir un enlace y el submenú de escritorio se cierra con Esc.
-- **Formulario:** los botones de cotizar preseleccionan el servicio. La validación muestra los cuatro errores y enfoca el primero. Con datos válidos aparece el aviso de demostración.
-- **Propuesta 02:**
-  - Pestañas con flechas en escritorio; en móvil, al tocar «Subdivisión» queda visible solo ese panel y la página lo acerca; el menú móvil abre la pestaña correcta.
-  - Escena 3D «activa» en escritorio y «estatica» con movimiento reducido.
-  - Sin JS, la lista de pestañas se oculta y se ven los cinco paneles.
-
-**Limitaciones:** no se probó en Safari, Firefox ni en dispositivos físicos. El 3D se verificó con WebGL por software. No se hizo una auditoría automática de accesibilidad.
+Las licencias CC BY-SA exigen atribución si se publica, y los recortes son obras derivadas bajo la misma licencia. Lo recomendable es reemplazarlas por fotos propias.

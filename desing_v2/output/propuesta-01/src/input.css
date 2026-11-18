@@ -2,19 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Propuesta 01 · Editorial y fotográfica
-   Fuente de verdad: desing_v2/style-guide-summary.md */
+/* Propuesta 01 (desing_v2) · Editorial y fotográfica
+   Fuente de verdad: desing_v2/style-guide-summary.md (acento Turquesa Cotizar #2BB3C0).
+   Ritmo de secciones: blanco → niebla → azul → blanco → niebla → azul (pie),
+   para que cada bloque se distinga sin depender de tarjetas. */
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
   }
   body {
     overflow-x: clip;
     @apply bg-blanco font-texto text-base text-grafito antialiased;
-    font-feature-settings: "kern";
   }
   h1, h2, h3, h4 {
     @apply font-titulo text-azul;
@@ -24,84 +25,123 @@
   p { text-wrap: pretty; }
   .tabular { font-variant-numeric: tabular-nums; }
 
-  :focus-visible {
-    outline: 2px solid #053260;
-    outline-offset: 3px;
-  }
-  .sobre-azul :focus-visible {
-    outline-color: #FFFFFF;
-  }
+  :focus-visible { outline: 2px solid #053260; outline-offset: 3px; }
+  .sobre-azul :focus-visible { outline-color: #FFFFFF; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
     }
+  }
+  @media (max-width: 767px) {
+    html { scroll-padding-bottom: 5rem; }
   }
 }
 
 @layer components {
-  .contenedor {
-    @apply mx-auto w-full max-w-contenedor px-4 md:px-8;
-  }
+  .contenedor { @apply mx-auto w-full max-w-contenedor px-4 md:px-8; }
 
-  /* Botones: Turquesa Cotizar (#2BB3C0) con texto azul, reservado a la acción de cotizar;
-     azul con texto blanco para cualquier otra acción principal. */
   .btn {
-    @apply inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded px-6 font-titulo text-base font-semibold transition-colors duration-rapido;
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded px-6 font-titulo text-base font-semibold;
+    transition: background-color 150ms ease-out, box-shadow 150ms ease-out, transform 150ms ease-out;
   }
-  .btn-primario {
-    @apply btn bg-azul text-blanco hover:bg-grafito;
-  }
+  /* Turquesa Cotizar: exclusivo de la acción de cotizar, texto azul (5,09:1). */
   .btn-cotizar {
-    @apply btn bg-turquesa text-azul hover:underline hover:decoration-2 hover:underline-offset-4;
+    @apply btn bg-turquesa text-azul;
   }
+  .btn-cotizar:hover { box-shadow: inset 0 0 0 2px #053260; }
+  .btn-cotizar:active { transform: translateY(1px); }
 
   .enlace {
-    @apply font-semibold text-azul underline decoration-verde decoration-1 underline-offset-4 transition-colors duration-rapido hover:decoration-2;
+    @apply font-semibold text-azul underline decoration-verde decoration-1 underline-offset-4;
+    transition: text-decoration-thickness 150ms ease-out;
+  }
+  .enlace:hover { text-decoration-thickness: 2px; }
+
+  .leyenda { @apply text-sm text-pizarra; }
+
+  /* Enlaces del menú: filete verde inferior en hover y en la sección activa */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px; bottom: 2px;
+    height: 2px;
+    background: #3A753E;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 250ms ease-out;
+  }
+  .nav-link:hover::after,
+  .nav-link[aria-current="true"]::after { transform: scaleX(1); }
+
+  /* Índice fijo de servicios (escritorio) */
+  .indice-link {
+    @apply -ml-px block border-l-2 border-transparent py-2 pl-4 font-titulo text-base font-semibold text-pizarra;
+    transition: color 150ms ease-out, border-color 250ms ease-out;
+  }
+  .indice-link:hover { @apply text-azul; }
+  .indice-link[aria-current="true"] { @apply border-verde text-azul; }
+
+  /* Índice móvil en fila */
+  .chip {
+    @apply shrink-0 whitespace-nowrap rounded border border-pizarra/40 bg-blanco px-3 py-2 font-titulo text-sm font-semibold text-azul;
+    transition: background-color 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+  }
+  .chip[aria-current="true"] { @apply border-azul bg-azul text-blanco; }
+
+  /* Fichas de servicio: separadas por filetes, sin tarjetas */
+  .servicio {
+    @apply border-t border-pizarra/20 py-12 md:py-16;
+    scroll-margin-top: 8.5rem;
+  }
+  .servicio:first-child { @apply border-t-0 pt-0; }
+  @media (min-width: 1024px) {
+    .servicio { scroll-margin-top: 7rem; }
   }
 
-  .filete { @apply border-verde; }
-
-  .leyenda {
-    @apply text-sm text-pizarra;
+  .lista-check li {
+    @apply relative border-b border-pizarra/15 py-2 pl-8;
+  }
+  .lista-check li::before {
+    content: "";
+    position: absolute; left: 0; top: 0.7rem;
+    width: 18px; height: 18px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233A753E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") no-repeat center / contain;
   }
 
-  /* Placeholder fotográfico explícito */
-  .placeholder-foto {
-    @apply relative flex items-center justify-center overflow-hidden rounded border border-dashed border-pizarra bg-niebla;
+  /* Pasos de «Cómo trabajamos» */
+  .paso-numero {
+    @apply absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-full border-2 border-blanco bg-azul font-titulo text-lg font-bold text-blanco;
+  }
+  @media (min-width: 768px) {
+    .paso-numero { position: relative; }
   }
 
   /* Formulario */
   .campo-label { @apply mb-2 block font-titulo text-base font-semibold text-azul; }
   .campo {
-    @apply block min-h-[48px] w-full rounded border border-pizarra bg-blanco px-4 py-3 text-base text-grafito transition-colors duration-rapido;
+    @apply block min-h-[48px] w-full rounded border border-pizarra/60 bg-blanco px-4 py-3 text-base text-grafito;
+    transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
   }
   .campo:hover { @apply border-azul; }
-  .campo:focus-visible { outline: 2px solid #053260; outline-offset: 1px; border-color: #053260; }
+  .campo:focus-visible { outline: none; border-color: #053260; box-shadow: 0 0 0 3px rgb(5 50 96 / 0.18); }
   .campo[aria-invalid="true"] { @apply border-error; }
+  .campo-select {
+    @apply appearance-none pr-12;
+    background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%23053260' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  }
   .campo-error { @apply mt-2 flex items-start gap-2 text-sm font-semibold text-error; }
   .campo-error[hidden] { display: none; }
 }
 
-/* Movimiento: un solo momento orquestado en la portada (250 ms, ease-out).
-   El contenido es visible sin JavaScript y nunca queda oculto. */
-@media (prefers-reduced-motion: no-preference) {
-  .entrada {
-    animation: entrada 250ms ease-out both;
-  }
-  .entrada-2 { animation-delay: 150ms; }
-  @keyframes entrada {
-    from { opacity: 0.001; transform: translateY(8px); }
-    to { opacity: 1; transform: none; }
-  }
-}
-
-/* Menú desplegable de servicios */
-.submenu[hidden] { display: none; }
-.submenu { animation: none; }
+/* ---------- Menús ---------- */
+.submenu[hidden], .menu-movil[hidden] { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   .submenu:not([hidden]) { animation: aparecer 150ms ease-out; }
   .menu-movil:not([hidden]) { animation: aparecer 250ms ease-out; }
@@ -111,10 +151,9 @@
   }
 }
 
-/* ---------- Iteración 2: aparición suave al desplazar ----------
-   Solo se activa si JavaScript agregó .revelar-activo y el usuario no pidió menos movimiento.
-   Sin JS, sin IntersectionObserver o al imprimir, el contenido se ve siempre.
-   Duración y curva de la guía: 250 ms, ease-out; el desfase entre piezas va en --retraso. */
+/* ---------- Aparición al desplazar ----------
+   Movimiento sereno y predecible: opacidad + 16 px, 250 ms ease-out, en secuencia (--retraso).
+   Solo con .revelar-activo (JS) y sin preferencia de movimiento reducido. */
 @media (prefers-reduced-motion: no-preference) {
   .revelar-activo [data-revelar] {
     opacity: 0;
@@ -122,21 +161,31 @@
     transition: opacity 250ms ease-out, transform 250ms ease-out;
     transition-delay: var(--retraso, 0ms);
   }
-  .revelar-activo [data-revelar].revelado {
+  /* Fotografías: se descubren de abajo hacia arriba, sin filtros ni capas de color. */
+  .revelar-activo [data-revelar="imagen"] {
     opacity: 1;
     transform: none;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 250ms ease-out;
+    transition-delay: var(--retraso, 0ms);
   }
+  /* Línea de progreso de los pasos */
+  .revelar-activo [data-revelar="trazo"] {
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 250ms ease-out 100ms;
+  }
+  @media (min-width: 768px) {
+    .revelar-activo [data-revelar="trazo"] { transform: scaleX(0); transform-origin: left; }
+  }
+  .revelar-activo [data-revelar].revelado { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
 }
 @media print {
-  [data-revelar] { opacity: 1 !important; transform: none !important; }
+  [data-revelar] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
 }
 
-/* Sección activa en el menú principal */
-.nav-link[aria-current="true"] {
-  box-shadow: inset 0 -2px 0 #3A753E;
-}
-
-/* ---------- v2: barra de cotización en móvil ---------- */
+/* ---------- Barra de cotización en móvil ---------- */
 .barra-cotizar {
   transform: translateY(100%);
   visibility: hidden;
@@ -147,6 +196,7 @@
   visibility: visible;
   transition: transform 250ms ease-out, visibility 0s;
 }
-@media (max-width: 767px) {
-  html { scroll-padding-bottom: 5rem; }
-}
+
+/* Fila de chips: oculta la barra de desplazamiento, mantiene el gesto */
+#chips-servicios { scrollbar-width: none; }
+#chips-servicios::-webkit-scrollbar { display: none; }

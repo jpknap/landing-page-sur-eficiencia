@@ -84,6 +84,7 @@ function montar(THREE) {
   const mPizarra = matSolido(COLORES.pizarra);
   const lAzul = matLinea(COLORES.azul);
   const lVerde = matLinea(COLORES.verde);
+  const lBlanco = matLinea(COLORES.blanco); // aristas de techos: se leen sobre el fondo azul de la portada
 
   function conAristas(geo, mat, lineMat = lAzul) {
     reg(geo);
@@ -139,7 +140,7 @@ function montar(THREE) {
     const geoTecho = new THREE.ExtrudeGeometry(forma, { depth: w, bevelEnabled: false });
     geoTecho.rotateY(Math.PI / 2);
     geoTecho.translate(-w / 2, h, 0);
-    const techo = conAristas(geoTecho, mAzul, lAzul);
+    const techo = conAristas(geoTecho, mAzul, lBlanco);
     v.add(techo);
     v.position.set(cx, 0, cz);
     grupo.add(v);
