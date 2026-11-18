@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Propuesta 01 · Editorial y fotográfica
+   Fuente de verdad: desing_v1/style-guide-summary.md */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    overflow-x: clip;
+    @apply bg-blanco font-texto text-base text-grafito antialiased;
+    font-feature-settings: "kern";
+  }
+  h1, h2, h3, h4 {
+    @apply font-titulo text-azul;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  :focus-visible {
+    outline: 2px solid #053260;
+    outline-offset: 3px;
+  }
+  .sobre-azul :focus-visible {
+    outline-color: #F1EBDD;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .contenedor {
+    @apply mx-auto w-full max-w-contenedor px-4 md:px-8;
+  }
+
+  /* Botones: azul con texto blanco sobre fondos claros;
+     blanco hueso solo para cotizar sobre fondo azul. */
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded px-6 font-titulo text-base font-semibold transition-colors duration-rapido;
+  }
+  .btn-primario {
+    @apply btn bg-azul text-blanco hover:bg-grafito;
+  }
+  .btn-cotizar {
+    @apply btn bg-hueso text-azul hover:bg-blanco;
+  }
+
+  .enlace {
+    @apply font-semibold text-azul underline decoration-verde decoration-1 underline-offset-4 transition-colors duration-rapido hover:decoration-2;
+  }
+
+  .filete { @apply border-verde; }
+
+  .leyenda {
+    @apply text-sm text-pizarra;
+  }
+
+  /* Placeholder fotográfico explícito */
+  .placeholder-foto {
+    @apply relative flex items-center justify-center overflow-hidden rounded border border-dashed border-pizarra bg-niebla;
+  }
+
+  /* Formulario */
+  .campo-label { @apply mb-2 block font-titulo text-base font-semibold text-azul; }
+  .campo {
+    @apply block min-h-[48px] w-full rounded border border-pizarra bg-blanco px-4 py-3 text-base text-grafito transition-colors duration-rapido;
+  }
+  .campo:hover { @apply border-azul; }
+  .campo:focus-visible { outline: 2px solid #053260; outline-offset: 1px; border-color: #053260; }
+  .campo[aria-invalid="true"] { @apply border-error; }
+  .campo-error { @apply mt-2 flex items-start gap-2 text-sm font-semibold text-error; }
+  .campo-error[hidden] { display: none; }
+}
+
+/* Movimiento: un solo momento orquestado en la portada (250 ms, ease-out).
+   El contenido es visible sin JavaScript y nunca queda oculto. */
+@media (prefers-reduced-motion: no-preference) {
+  .entrada {
+    animation: entrada 250ms ease-out both;
+  }
+  .entrada-2 { animation-delay: 150ms; }
+  @keyframes entrada {
+    from { opacity: 0.001; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* Menú desplegable de servicios */
+.submenu[hidden] { display: none; }
+.submenu { animation: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .submenu:not([hidden]) { animation: aparecer 150ms ease-out; }
+  .menu-movil:not([hidden]) { animation: aparecer 250ms ease-out; }
+  @keyframes aparecer {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ---------- Iteración 2: aparición suave al desplazar ----------
+   Solo se activa si JavaScript agregó .revelar-activo y el usuario no pidió menos movimiento.
+   Sin JS, sin IntersectionObserver o al imprimir, el contenido se ve siempre.
+   Duración y curva de la guía: 250 ms, ease-out; el desfase entre piezas va en --retraso. */
+@media (prefers-reduced-motion: no-preference) {
+  .revelar-activo [data-revelar] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 250ms ease-out, transform 250ms ease-out;
+    transition-delay: var(--retraso, 0ms);
+  }
+  .revelar-activo [data-revelar].revelado {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media print {
+  [data-revelar] { opacity: 1 !important; transform: none !important; }
+}
+
+/* Sección activa en el menú principal */
+.nav-link[aria-current="true"] {
+  box-shadow: inset 0 -2px 0 #3A753E;
+}

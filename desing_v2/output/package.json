@@ -1,0 +1,19 @@
+{
+  "name": "sur-eficiencia-propuestas-v2",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Propuestas web para Sur Eficiencia según desing_v2 (acento Turquesa Cotizar): 01 editorial, 02 arquitectónica con 3D.",
+  "scripts": {
+    "build:p1": "tailwindcss -c propuesta-01/tailwind.config.js -i propuesta-01/src/input.css -o propuesta-01/styles.css --minify",
+    "build:p2": "tailwindcss -c propuesta-02/tailwind.config.js -i propuesta-02/src/input.css -o propuesta-02/styles.css --minify",
+    "vendor": "node scripts/icons.mjs && cp node_modules/three/build/three.module.min.js propuesta-02/vendor/",
+    "build": "npm run vendor && npm run build:p1 && npm run build:p2",
+    "serve": "python3 -m http.server 4173",
+    "logo": "python3 -I scripts/logo.py"
+  },
+  "devDependencies": {
+    "lucide": "0.460.0",
+    "tailwindcss": "3.4.14",
+    "three": "0.170.0"
+  }
+}

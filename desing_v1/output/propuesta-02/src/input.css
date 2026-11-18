@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Propuesta 02 · Arquitectónica y técnica
+   Fuente de verdad: desing_v1/style-guide-summary.md
+   Lenguaje gráfico: lámina de ingeniería (marco, retícula, cotas y cajetín). */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    overflow-x: clip;
+    @apply bg-blanco font-texto text-base text-grafito antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-titulo text-azul;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  :focus-visible { outline: 2px solid #053260; outline-offset: 3px; }
+  .sobre-azul :focus-visible { outline-color: #F1EBDD; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .contenedor { @apply mx-auto w-full max-w-contenedor px-4 md:px-8; }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap rounded px-6 font-titulo text-base font-semibold transition-colors duration-rapido;
+  }
+  .btn-primario { @apply btn bg-azul text-blanco hover:bg-grafito; }
+  .btn-cotizar { @apply btn bg-hueso text-azul hover:bg-blanco; }
+  .btn-secundario { @apply btn border border-azul text-azul hover:bg-niebla; }
+
+  .leyenda { @apply text-sm text-pizarra; }
+
+  /* Retícula de lámina: líneas de 48 px en niebla */
+  .reticula {
+    background-image:
+      linear-gradient(to right, #EEF3F6 1px, transparent 1px),
+      linear-gradient(to bottom, #EEF3F6 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Cota: línea con remates, usada para medir el ancho de títulos y pasos */
+  .cota {
+    @apply relative block h-3 border-x border-verde;
+  }
+  .cota::before {
+    content: "";
+    @apply absolute inset-x-0 top-1/2 border-t border-verde;
+  }
+
+  /* Marcas de esquina de un marco de dibujo */
+  .marco { position: relative; }
+  .marco::before, .marco::after {
+    content: "";
+    position: absolute;
+    width: 16px; height: 16px;
+    border-color: #3A753E;
+    pointer-events: none;
+  }
+  .marco::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+  .marco::after { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+
+  .placeholder-foto {
+    @apply relative flex items-center justify-center overflow-hidden rounded border border-dashed border-pizarra bg-niebla;
+  }
+
+  .campo-label { @apply mb-2 block font-titulo text-base font-semibold text-azul; }
+  .campo {
+    @apply block min-h-[48px] w-full rounded border border-pizarra bg-blanco px-4 py-3 text-base text-grafito transition-colors duration-rapido;
+  }
+  .campo:hover { @apply border-azul; }
+  .campo:focus-visible { outline: 2px solid #053260; outline-offset: 1px; border-color: #053260; }
+  .campo[aria-invalid="true"] { @apply border-error; }
+  .campo-error { @apply mt-2 flex items-start gap-2 text-sm font-semibold text-error; }
+  .campo-error[hidden] { display: none; }
+
+  /* Pestañas de servicios */
+}
+
+/* Escena 3D: el canvas aparece sobre la alternativa estática solo cuando ya dibujó. */
+#escena canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+}
+#escena[data-estado="activa"] canvas { opacity: 1; }
+#escena[data-estado="activa"] .alternativa-estatica { visibility: hidden; }
+
+.submenu[hidden], .menu-movil[hidden], .panel[hidden] { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .submenu:not([hidden]) { animation: aparecer 150ms ease-out; }
+  .menu-movil:not([hidden]) { animation: aparecer 250ms ease-out; }
+  @keyframes aparecer {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* Pestaña activa: fuera de capas para que el hover no la sobrescriba. */
+.pestana[aria-selected="true"],
+.pestana[aria-selected="true"]:hover { background-color: #053260; color: #FFFFFF; }
+.pestana[aria-selected="true"] svg { color: #F1EBDD; }
+
+/* ---------- Iteración 2: aparición suave al desplazar ----------
+   Solo se activa si JavaScript agregó .revelar-activo y el usuario no pidió menos movimiento.
+   Sin JS, sin IntersectionObserver o al imprimir, el contenido se ve siempre.
+   Duración y curva de la guía: 250 ms, ease-out; el desfase entre piezas va en --retraso. */
+@media (prefers-reduced-motion: no-preference) {
+  .revelar-activo [data-revelar] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 250ms ease-out, transform 250ms ease-out;
+    transition-delay: var(--retraso, 0ms);
+  }
+  .revelar-activo [data-revelar].revelado {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media print {
+  [data-revelar] { opacity: 1 !important; transform: none !important; }
+}
+
+/* Sección activa en el menú principal */
+.nav-link[aria-current="true"] {
+  box-shadow: inset 0 -2px 0 #3A753E;
+}
+
+/* Propuesta 02: la línea de perfil de «Cómo trabajamos» se traza como en un plano. */
+@media (prefers-reduced-motion: no-preference) {
+  .revelar-activo [data-revelar="trazo"] {
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  @media (min-width: 768px) {
+    .revelar-activo [data-revelar="trazo"] {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+  }
+  .revelar-activo [data-revelar="trazo"].revelado { transform: none; }
+}
